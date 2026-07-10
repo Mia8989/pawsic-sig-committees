@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex, nofollow">
+    <title>PAWSIC SIG Committees - Chair Resources</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background-color: #FFFFFF;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #E8ECF1;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            color: #0C1F3F;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        nav a {
+            color: #0C1F3F;
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #2B7CCA;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0C1F3F 0%, #1A5494 100%);
+            color: #FFFFFF;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 0;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        section h2 {
+            color: #0C1F3F;
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        section h2::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #2B7CCA;
+            margin-bottom: 1rem;
+        }
+
+        section h3 {
+            color: #1A5494;
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            color: #4A5568;
+            font-size: 1rem;
+        }
+
+        /* Video Section */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 2rem 0;
+            background-color: #f0f0f0;
+            border: 1px solid #E8ECF1;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Zoom Scheduler Section */
+        .scheduler-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E8ECF1;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .scheduler-card h3 {
+            margin-top: 0;
+        }
+
+        .scheduler-card ol {
+            margin-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .scheduler-card li {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .scheduler-card code {
+            background-color: #F7F8FA;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            color: #0C1F3F;
+            font-family: 'Courier New', monospace;
+        }
+
+        .scheduler-iframe {
+            width: 100%;
+            height: 560px;
+            border: 1px solid #E8ECF1;
+            border-radius: 6px;
+            margin-top: 2rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border: 1px solid #E8ECF1;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h4 {
+            color: #0C1F3F;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #2B7CCA;
+            color: #FFFFFF;
+            padding: 0.9rem 1.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #1A5494;
+        }
+
+        .btn::after {
+            content: '→';
+            font-size: 1.1rem;
+        }
+
+        .btn-secondary {
+            background-color: #C9A84C;
+        }
+
+        .btn-secondary:hover {
+            background-color: #B8963F;
+        }
+
+        .btn-block {
+            display: block;
+            text-align: center;
+        }
+
+        /* Document Section */
+        .document-step {
+            background-color: #FAF8F4;
+            border-left: 4px solid #2B7CCA;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .document-step strong {
+            color: #0C1F3F;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step {
+            background-color: #F7F8FA;
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid #E8ECF1;
+        }
+
+        .step-number {
+            display: inline-block;
+            background-color: #2B7CCA;
+            color: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step h4 {
+            color: #0C1F3F;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .step p {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .step ul {
+            margin-left: 1.5rem;
+        }
+
+        .step li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Root PAWSIC Info */
+        .info-box {
+            background-color: #E8F4F8;
+            border-left: 4px solid #1A5494;
+            padding: 2rem;
+            border-radius: 6px;
+            margin: 2rem 0;
+        }
+
+        .info-box h4 {
+            color: #0C1F3F;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box ol {
+            margin-left: 1.5rem;
+        }
+
+        .info-box li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border-bottom: 1px solid #E8ECF1;
+            padding: 1.5rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h4 {
+            color: #0C1F3F;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .faq-item p {
+            margin-bottom: 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0C1F3F;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            margin: 0.8rem 0;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #38B6FF;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 0;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scheduler-iframe {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <h1>PAWSIC SIG Committees</h1>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>SIG Chair Resources</h1>
+            <p>Your complete guide to scheduling meetings, preparing governance documents, and supporting your committee</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Schedule Meetings Section -->
+        <section id="schedule">
+            <h2>Schedule Committee Meetings</h2>
+            <p>Learn how to book meetings and add your committee members using the PAWSIC Zoom scheduler.</p>
+
+            <h3>How to Use the Scheduler</h3>
+            <div class="scheduler-card">
+                <h3 style="margin-top: 0;">Step-by-Step Guide</h3>
+                <ol>
+                    <li><strong>Select your date and time:</strong> Pick a time that works for your committee.</li>
+                    <li><strong>Add member emails:</strong> In the "Additional Attendees" field, paste your committee members' email addresses separated by commas. For example: <code>jane@example.com, john@example.com, sarah@example.com</code></li>
+                    <li><strong>Complete the booking:</strong> The meeting link will be automatically sent to you and all attendees via email.</li>
+                </ol>
+                <p style="background-color: #FFF8E7; padding: 1rem; border-radius: 6px; margin-bottom: 0; margin-top: 1.5rem;"><strong>Screenshot showing Additional Attendees field:</strong> [Screenshot to be inserted here]</p>
+            </div>
+
+            <h3>Book Your Meeting</h3>
+            <p>Use the embedded scheduler below to book your committee meeting. You can schedule multiple meetings as needed for your committee's regular cadence.</p>
+            <iframe class="scheduler-iframe" src="https://scheduler.zoom.us/pawsic/1-hour-pawsic-committees?embed=true"></iframe>
+        </section>
+
+        <!-- Governance Documents Section -->
+        <section id="documents">
+            <h2>Prepare Governance Documents</h2>
+            <p>Use these templates to prepare your committee's required governance documents. Each template is provided as a view-only Google Doc that you can copy and customize for your specific committee.</p>
+
+            <h3>Conflict of Interest (COI) & Non-Disclosure Agreement (NDA)</h3>
+            <p>Committee members must complete both documents before attending their first meeting. Follow this workflow:</p>
+
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h4>Access Templates</h4>
+                    <p>Click the buttons below to view the COI and NDA templates. Each opens as a view-only Google Doc.</p>
+                    <div class="cards-grid">
+                        <div style="text-align: center;">
+                            <a href="#" class="btn" onclick="alert('Link to COI template will be provided')">View COI Template →</a>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="#" class="btn" onclick="alert('Link to NDA template will be provided')">View NDA Template →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h4>Copy & Customize</h4>
+                    <p>Make a copy of each template (File > Make a copy). Customize the text for your specific committee's needs. You do not need approval from PAWSIC—make the documents work for your group.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h4>Share with Admin</h4>
+                    <p>Once your finalized documents are ready, share them with the PAWSIC program administrator. Email your customized COI and NDA documents along with the list of committee members who need to sign.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h4>Admin Creates JotForm</h4>
+                    <p>PAWSIC will create a JotForm with your finalized document text. This form will include signature fields and will be set up for your committee members to sign digitally.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h4>Distribute Signing Form</h4>
+                    <p>Once the JotForm is ready, PAWSIC will send it to you to distribute to your committee members. Share the signing link with your group and collect completed forms before the first meeting.</p>
+                </div>
+            </div>
+
+            <h3>Bylaws & Committee Policy</h3>
+            <p>After your first committee meeting, upload finalized bylaws and policy documents to your committee's designated Google Drive folder.</p>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <h4>Bylaws Example</h4>
+                    <p>View sample bylaws to understand structure and content. Copy this template and customize for your committee.</p>
+                    <a href="#" class="btn" onclick="alert('Link to bylaws example will be provided')">View Bylaws Example →</a>
+                </div>
+                <div class="card">
+                    <h4>Policy Example</h4>
+                    <p>View sample committee policy to guide the development of your group's operating procedures and guidelines.</p>
+                    <a href="#" class="btn" onclick="alert('Link to policy example will be provided')">View Policy Example →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accessing Committee Drive -->
+        <section id="drive">
+            <h2>Access Your Committee's Google Drive</h2>
+            <p>Your committee's shared Google Drive is the central hub for all documents, meeting recordings, agendas, and collaborative work.</p>
+
+            <h3>About Your Committee Drive</h3>
+            <p>Your designated Google Drive folder contains:</p>
+            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                <li>Meeting agendas and minutes</li>
+                <li>Meeting recordings and transcripts</li>
+                <li>Committee governance documents (bylaws, policies)</li>
+                <li>Member contact information</li>
+                <li>Shared resources and templates</li>
+            </ul>
+
+            <h3>Root.pawsic.org Access</h3>
+            <div class="info-box">
+                <h4>Login Instructions</h4>
+                <ol>
+                    <li><strong>Use Your Designated Email:</strong> Log in using the specific email address provided to you by the PAWSIC administrator. This email is linked to your committee's access.</li>
+                    <li><strong>Visit root.pawsic.org:</strong> Go to the portal in your web browser.</li>
+                    <li><strong>Enter Your Email:</strong> When prompted, enter your assigned email address.</li>
+                    <li><strong>Authenticate:</strong> Follow the authentication steps to verify your identity.</li>
+                    <li><strong>Access Your Drive:</strong> Once logged in, you'll see your committee's shared drive and all linked resources.</li>
+                </ol>
+            </div>
+
+            <div class="info-box">
+                <h4>Troubleshooting Login Issues</h4>
+                <p><strong>Having trouble accessing?</strong> Make sure you:</p>
+                <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+                    <li>Are using the exact email address assigned to you by the PAWSIC administrator</li>
+                    <li>Have cleared your browser cookies if you were logged in previously</li>
+                    <li>Contact PAWSIC support if you continue to have issues</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Initial Member Communication -->
+        <section id="communication">
+            <h2>Invite Your Committee Members</h2>
+            <p>Use this sample email to invite your initial committee members and co-chairs to participate in the signing process and first meeting.</p>
+
+            <h3>Sample Invitation Email</h3>
+            <div style="background-color: #F7F8FA; border: 1px solid #E8ECF1; border-radius: 8px; padding: 2rem; margin: 2rem 0;">
+                <p style="margin-bottom: 1.5rem;"><strong>Subject: You're Invited to Join the PAWSIC [Committee Name] Shared Interest Group</strong></p>
+
+                <p style="margin-bottom: 1rem;">Dear [Member Name],</p>
+
+                <p style="margin-bottom: 1rem;">We're excited to invite you to join the PAWSIC [Committee Name] Shared Interest Group (SIG). This committee brings together [brief description of committee focus] to advance [committee mission].</p>
+
+                <p style="margin-bottom: 1rem;"><strong>Before our first meeting on [Date], please complete the following:</strong></p>
+
+                <ol style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li>Review and sign the Conflict of Interest (COI) form via this JotForm link: [COI Form Link]</li>
+                    <li>Review and sign the Non-Disclosure Agreement (NDA) via this JotForm link: [NDA Form Link]</li>
+                </ol>
+
+                <p style="margin-bottom: 1rem;">Both forms must be completed by [Deadline Date] so we can move forward with our first meeting. These documents help us maintain transparency and protect our committee's confidential discussions.</p>
+
+                <p style="margin-bottom: 1rem;">Our first meeting will be held on [Date] at [Time] via Zoom. You'll receive a calendar invite with the meeting link once all members have signed the required documents.</p>
+
+                <p style="margin-bottom: 1rem;">Questions? Feel free to reach out to me directly.</p>
+
+                <p style="margin-bottom: 0;">Looking forward to working together,<br>[Your Name]<br>PAWSIC [Committee Name] Chair</p>
+            </div>
+
+            <p style="background-color: #FFF8E7; padding: 1rem; border-radius: 6px; margin-top: 2rem;"><strong>Note:</strong> Customize this email with your committee name, meeting details, and document links. Feel free to personalize the tone and add any additional information relevant to your group.</p>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h4>Can I add members after the first meeting?</h4>
+                <p>Yes. You can invite additional members at any time. They will need to complete the COI and NDA forms and then attend from the next scheduled meeting onward.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Who has access to the committee's Google Drive?</h4>
+                <p>Typically, the Chair and Co-Chair have full access to the Google Drive. Individual members may be added to specific shared folders or files as appropriate for your committee's structure.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>When should we upload bylaws and policy documents?</h4>
+                <p>These should be uploaded to your committee's Google Drive folder after your first committee meeting, once the group has reviewed and finalized them.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How do I reschedule a meeting I've already booked?</h4>
+                <p>Use the Zoom scheduler again to book a different time, or contact the PAWSIC program administrator if you need to cancel an existing meeting and reschedule.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What if I need help creating my committee's bylaws and policy?</h4>
+                <p>The PAWSIC program administrator can provide guidance and the example documents to help you get started. We don't create these for you, but we're happy to review your drafts and offer suggestions.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Who do I contact if I have questions?</h4>
+                <p>Reach out to the PAWSIC program administrator at <a href="mailto:dahlia@pawsic.org" style="color: #2B7CCA;">dahlia@pawsic.org</a> with any questions or concerns.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section style="text-align: center; background-color: #F7F8FA; padding: 3rem 2rem; border-radius: 8px; border: 1px solid #E8ECF1;">
+            <h2 style="margin-bottom: 1.5rem;">Need Help?</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.05rem;">Contact the PAWSIC program team if you have questions about the scheduling process, document preparation, or committee setup.</p>
+            <a href="mailto:dahlia@pawsic.org" class="btn btn-secondary">Contact PAWSIC Support →</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 PAWSIC. All rights reserved.</p>
+        <p>Post Acute Wound & Skin Integrity Council</p>
+        <p>Questions? Email <a href="mailto:dahlia@pawsic.org">dahlia@pawsic.org</a></p>
+    </footer>
+</body>
+</html>
