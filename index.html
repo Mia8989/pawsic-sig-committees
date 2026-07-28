@@ -61,6 +61,47 @@
             color: #2B7CCA;
         }
 
+        /* Tab Navigation */
+        .tabs-nav {
+            background-color: #FFFFFF;
+            border-bottom: 2px solid #E8ECF1;
+            position: sticky;
+            top: 60px;
+            z-index: 99;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tabs-nav .container {
+            display: flex;
+            gap: 0;
+            padding: 0 !important;
+            max-width: none;
+        }
+
+        .tabs-nav a {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            color: #4A5568;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            margin: 0;
+        }
+
+        .tabs-nav a:hover {
+            color: #0C1F3F;
+            background-color: #FAF8F4;
+        }
+
+        .tabs-nav a.active {
+            color: #2B7CCA;
+            border-bottom-color: #2B7CCA;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #0C1F3F 0%, #1A5494 100%);
@@ -451,6 +492,17 @@
         </div>
     </div>
 
+    <!-- Tab Navigation -->
+    <div class="tabs-nav">
+        <div class="container">
+            <a href="#schedule" class="tab-link active">Schedule Meetings</a>
+            <a href="#documents" class="tab-link">Governance Documents</a>
+            <a href="#drive" class="tab-link">Access Your Drive</a>
+            <a href="#communication" class="tab-link">Invite Members</a>
+            <a href="#faq" class="tab-link">FAQ</a>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main class="container">
         <!-- Schedule Meetings Section -->
@@ -658,5 +710,50 @@
         <p>Post Acute Wound & Skin Integrity Council</p>
         <p>Questions? Email <a href="mailto:dahlia@pawsic.org">dahlia@pawsic.org</a></p>
     </footer>
+
+    <script>
+        // Tab navigation highlighting
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const sections = document.querySelectorAll('main > section');
+
+        // Smooth scroll and highlight on tab click
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    // Update active tab
+                    tabLinks.forEach(tab => tab.classList.remove('active'));
+                    link.classList.add('active');
+
+                    // Smooth scroll
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Highlight tab on scroll
+        window.addEventListener('scroll', () => {
+            let currentSectionId = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (window.pageYOffset >= sectionTop - 200) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            tabLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
