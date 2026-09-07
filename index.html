@@ -180,6 +180,22 @@
         .mark-done.done .md-box{background:#2E9E6A;border-color:#2E9E6A;}
         .mark-done.done .md-box svg{opacity:1;}
 
+        /* Do-this checklist (verb-first, tickable) */
+        .checklist{background:#fff;border:1px solid var(--border);border-left:5px solid var(--accent);border-radius:14px;padding:1.15rem 1.3rem;margin:1.3rem 0;max-width:600px;box-shadow:0 1px 2px rgba(12,31,63,.05);}
+        .cl-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:.7rem;}
+        .cl-title{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--gray);}
+        .cl-meta{font-size:.85rem;color:var(--gray);font-weight:600;}
+        .cl-meta b{color:var(--accent-deep);}
+        #track-board .cl-meta b{color:var(--gold-deep);}
+        .cl-item{display:flex;align-items:flex-start;gap:.7rem;padding:.45rem 0;cursor:pointer;user-select:none;}
+        .cl-box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid #C7D0DB;display:flex;align-items:center;justify-content:center;margin-top:2px;transition:all .15s;}
+        .cl-box svg{width:13px;height:13px;opacity:0;color:#fff;}
+        .cl-txt{font-size:1.04rem;color:var(--charcoal);line-height:1.5;}
+        .cl-item:hover .cl-box{border-color:#2E9E6A;}
+        .cl-item.done .cl-box{background:#2E9E6A;border-color:#2E9E6A;}
+        .cl-item.done .cl-box svg{opacity:1;}
+        .cl-item.done .cl-txt{color:var(--gray);text-decoration:line-through;}
+
         /* Email sample */
         .email-sample{background:var(--light-bg);border:1px solid var(--border);border-radius:14px;padding:1.6rem;margin:.4rem 0 1rem;position:relative;max-width:640px;}
         .email-sample p{margin-bottom:.85rem;font-size:1rem;color:var(--charcoal);line-height:1.65;}
@@ -329,6 +345,13 @@
                 </div>
 
                 <div class="callout warm"><strong>Tip:</strong> Upload your finalized bylaws and policy to your committee's Google Drive folder after your first meeting.</div>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~10 min</b> &middot; Need: your committee name</span></div>
+                    <div class="cl-item" data-k="c1a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Download the COI and NDA templates</span></div>
+                    <div class="cl-item" data-k="c1b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Customize each template for your committee</span></div>
+                    <div class="cl-item" data-k="c1c" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Email your finalized COI and NDA to admin</span></div>
+                    <div class="cl-item" data-k="c1d" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Share the signing link with your members</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'chair-1')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -368,6 +391,12 @@
                     </div>
                 </div>
                 <div class="callout warm"><strong>Tip:</strong> Personalize the committee name, dates, and links before sending. Admin can help you build onboarding forms that also collect member resumes and availability.</div>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~5 min</b> &middot; Need: member emails</span></div>
+                    <div class="cl-item" data-k="c2a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Copy the invite email below</span></div>
+                    <div class="cl-item" data-k="c2b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Personalize the committee name, dates, and form links</span></div>
+                    <div class="cl-item" data-k="c2c" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Send it to your members</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'chair-2')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -401,6 +430,12 @@
 
                 <div class="subhead">Book your meeting</div>
                 <iframe class="scheduler-iframe" src="https://scheduler.zoom.us/pawsic/1-hour-pawsic-committees?embed=true" title="PAWSIC committee scheduler"></iframe>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~5 min</b></span></div>
+                    <div class="cl-item" data-k="c3a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Pick a date and time in the scheduler</span></div>
+                    <div class="cl-item" data-k="c3b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Paste your members' emails in the attendees field</span></div>
+                    <div class="cl-item" data-k="c3c" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Finish booking so everyone gets the invite</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'chair-3')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -434,6 +469,12 @@
                 <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>What can this app access?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>The app requests only your email address, purely to know who is logging in and load your dashboard. It cannot read your emails, access your Google Drive files, or manage your Google account.</p></div></div></div>
                 <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>How do I revoke access?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>Anytime, from your <a href="https://myaccount.google.com/" target="_blank" rel="noopener">Google Account</a>: Data &amp; Privacy &rarr; Third-party apps &amp; services &rarr; select the app &rarr; Remove Access.</p></div></div></div>
                 <div class="callout warm"><strong>Trouble signing in?</strong> Use the exact assigned email, clear your browser cookies if you were logged in before, and contact PAWSIC support if it persists.</div>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~3 min</b> &middot; Need: your assigned email</span></div>
+                    <div class="cl-item" data-k="c4a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Open root.pawsic.org</span></div>
+                    <div class="cl-item" data-k="c4b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Sign in with your assigned email</span></div>
+                    <div class="cl-item" data-k="c4c" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Confirm your email when prompted</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'chair-4')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -492,6 +533,11 @@
                     <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div><h5>Your leadership</h5><p>You help guide clinical governance and strategy.</p></div>
                 </div>
                 <div class="callout gold"><h4>Welcome message</h4><p>[Placeholder: optional welcome video or letter from the Board Chair or Executive Director.]</p></div>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~3 min</b></span></div>
+                    <div class="cl-item" data-k="b1a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Read the PAWSIC mission overview</span></div>
+                    <div class="cl-item" data-k="b1b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Watch or read the welcome message</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'board-1')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -512,6 +558,11 @@
                     <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div><h5>Ambassadorship</h5><p>Represent PAWSIC professionally and support its programs.</p></div>
                 </div>
                 <div class="callout blue"><strong>Term and time commitment:</strong> [PAWSIC leadership to confirm your term length and expected time commitment, for example meeting frequency and committee hours.]</div>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~3 min</b></span></div>
+                    <div class="cl-item" data-k="b2a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Review your six core responsibilities</span></div>
+                    <div class="cl-item" data-k="b2b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Note your term length and time commitment</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'board-2')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -533,6 +584,12 @@
 
                 <div class="subhead">Sign your required form</div>
                 <a class="action gold" href="https://form.jotform.com/executiveteam_executiveteam874/nda-and-coi" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="a-txt"><b>Sign the NDA &amp; COI Form</b><span>One form covers both &middot; required before your first meeting</span></span><span class="a-go">&#8594;</span></a>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~10 min</b></span></div>
+                    <div class="cl-item" data-k="b3a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Review the Board bylaws and policies</span></div>
+                    <div class="cl-item" data-k="b3b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Make a copy of the PAWSIC deck template</span></div>
+                    <div class="cl-item" data-k="b3c" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Sign the NDA &amp; COI form</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'board-3')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -550,6 +607,12 @@
                     <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><h5>Hi-res headshot</h5><p>Professional, well-lit, at least 1000px wide.</p></div>
                 </div>
                 <a class="action gold" href="https://form.jotform.com/executiveteam_executiveteam874/pawsic-guest-board-member-form" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span><span class="a-txt"><b>Submit Bio &amp; Headshot</b><span>Opens the PAWSIC Board member form</span></span><span class="a-go">&#8594;</span></a>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~10 min</b> &middot; Need: a headshot photo</span></div>
+                    <div class="cl-item" data-k="b4a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Write a 75 to 120 word bio</span></div>
+                    <div class="cl-item" data-k="b4b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Choose a high-resolution headshot</span></div>
+                    <div class="cl-item" data-k="b4c" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Submit the bio and headshot form</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'board-4')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -561,6 +624,11 @@
                 <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> See when the Board meets and who to contact for what.</span></div>
                 <div class="callout gold"><h4>Board meeting cadence</h4><p>[Placeholder: Board meeting schedule and cadence, for example quarterly meetings plus committee calls. Add dates or a calendar link.]</p></div>
                 <div class="callout gold"><h4>Key contacts</h4><p>[Placeholder: roster of who to contact for what, for example Board Chair, Executive Director, and program administrator.]</p></div>
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~2 min</b></span></div>
+                    <div class="cl-item" data-k="b5a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Add the Board meeting dates to your calendar</span></div>
+                    <div class="cl-item" data-k="b5b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Save your key PAWSIC contacts</span></div>
+                </div>
                 <div class="mark-done" onclick="toggleDone(this,'board-5')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
@@ -612,11 +680,13 @@
         function setText(px){document.documentElement.style.setProperty('--base',px+'px');try{localStorage.setItem('pawsic_text',px);}catch(e){}document.querySelectorAll('.text-size button').forEach(function(b){b.classList.remove('active');});var map={16:0,18:1,20:2};var btns=document.querySelectorAll('.text-size button');if(btns[map[px]])btns[map[px]].classList.add('active');}
         function toggleAccordion(header){header.classList.toggle('active');header.nextElementSibling.classList.toggle('active');}
         function copyEmail(btn){var text=document.getElementById('chair-email-body').innerText;navigator.clipboard.writeText(text).then(function(){var old=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=old;},1800);});}
+        function getChecks(){try{return JSON.parse(localStorage.getItem('pawsic_checks')||'{}');}catch(e){return {};}}
+        function toggleCheck(el){var k=el.getAttribute('data-k');el.classList.toggle('done');var c=getChecks();c[k]=el.classList.contains('done');try{localStorage.setItem('pawsic_checks',JSON.stringify(c));}catch(e){}}
         var STEPS={chair:['chair-1','chair-2','chair-3','chair-4'],board:['board-1','board-2','board-3','board-4','board-5']};
         function getDone(){try{return JSON.parse(localStorage.getItem('pawsic_done')||'{}');}catch(e){return {};}}
         function toggleDone(el,key){var done=getDone();done[key]=!done[key];try{localStorage.setItem('pawsic_done',JSON.stringify(done));}catch(e){}el.classList.toggle('done',!!done[key]);el.childNodes[el.childNodes.length-1].nodeValue=done[key]?' Completed':' Mark this step complete';refreshProgress(key.split('-')[0]);}
         function refreshProgress(role){if(role!=='chair'&&role!=='board')return;var done=getDone();var steps=STEPS[role];var count=steps.filter(function(s){return done[s];}).length;var pct=Math.round(count/steps.length*100);var fill=document.getElementById('progress-'+role);var label=document.getElementById('progress-label-'+role);if(fill)fill.style.width=pct+'%';if(label)label.textContent=count+' of '+steps.length+' complete';var nav=document.getElementById('stepnav-'+role);if(nav){var links=nav.querySelectorAll('a');steps.forEach(function(s,i){if(links[i])links[i].classList.toggle('done',!!done[s]);});}}
-        (function init(){var done=getDone();document.querySelectorAll('.mark-done').forEach(function(el){var key=el.getAttribute('onclick').match(/'([^']+)'/)[1];if(done[key]){el.classList.add('done');el.childNodes[el.childNodes.length-1].nodeValue=' Completed';}});var t=18;try{t=parseInt(localStorage.getItem('pawsic_text'))||18;}catch(e){}setText(t);var role=null;try{role=localStorage.getItem('pawsic_role');}catch(e){}if(role==='chair'||role==='board'){document.body.classList.remove('role-none');document.body.classList.add('role-'+role);refreshProgress(role);}refreshProgress('chair');refreshProgress('board');function setHeaderH(){var h=document.querySelector('.site-header').offsetHeight;document.documentElement.style.setProperty('--header-h',h+'px');}setHeaderH();window.addEventListener('resize',setHeaderH);})();
+        (function init(){var done=getDone();document.querySelectorAll('.mark-done').forEach(function(el){var key=el.getAttribute('onclick').match(/'([^']+)'/)[1];if(done[key]){el.classList.add('done');el.childNodes[el.childNodes.length-1].nodeValue=' Completed';}});var chk=getChecks();document.querySelectorAll('.cl-item').forEach(function(el){if(chk[el.getAttribute('data-k')])el.classList.add('done');});var t=18;try{t=parseInt(localStorage.getItem('pawsic_text'))||18;}catch(e){}setText(t);var role=null;try{role=localStorage.getItem('pawsic_role');}catch(e){}if(role==='chair'||role==='board'){document.body.classList.remove('role-none');document.body.classList.add('role-'+role);refreshProgress(role);}refreshProgress('chair');refreshProgress('board');function setHeaderH(){var h=document.querySelector('.site-header').offsetHeight;document.documentElement.style.setProperty('--header-h',h+'px');}setHeaderH();window.addEventListener('resize',setHeaderH);})();
     </script>
 </body>
 </html>
