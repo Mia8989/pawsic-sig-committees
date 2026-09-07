@@ -196,6 +196,13 @@
         .cl-item.done .cl-box svg{opacity:1;}
         .cl-item.done .cl-txt{color:var(--gray);text-decoration:line-through;}
 
+        /* Social follow row */
+        .social-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin:.4rem 0 1.2rem;max-width:600px;}
+        .soc{display:flex;align-items:center;gap:.65rem;background:#fff;border:1px solid var(--border);border-radius:12px;padding:.7rem .9rem;text-decoration:none;color:var(--navy);font-weight:700;font-size:.95rem;transition:all .2s;box-shadow:0 1px 2px rgba(12,31,63,.05);}
+        .soc:hover{border-color:var(--accent);transform:translateY(-2px);}
+        .soc .soc-ico{flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;}
+        .soc .soc-ico svg{width:19px;height:19px;}
+
         /* Email sample */
         .email-sample{background:var(--light-bg);border:1px solid var(--border);border-radius:14px;padding:1.6rem;margin:.4rem 0 1rem;position:relative;max-width:640px;}
         .email-sample p{margin-bottom:.85rem;font-size:1rem;color:var(--charcoal);line-height:1.65;}
@@ -295,11 +302,11 @@
         <div class="track-banner">
             <div class="container">
                 <h2>SIG Chair Onboarding</h2>
-                <p>Four steps to stand up your Shared Interest Group and keep it running.</p>
+                <p>Five steps to stand up your Shared Interest Group and keep it running.</p>
                 <a class="switch" onclick="setRole('board')">&#8596; I'm actually a Board Member</a>
             </div>
         </div>
-        <div class="progress-wrap"><div class="container progress-inner"><div class="progress-track"><div class="progress-fill" id="progress-chair"></div></div><div class="progress-label" id="progress-label-chair">0 of 4 complete</div></div></div>
+        <div class="progress-wrap"><div class="container progress-inner"><div class="progress-track"><div class="progress-fill" id="progress-chair"></div></div><div class="progress-label" id="progress-label-chair">0 of 5 complete</div></div></div>
 
         <div class="container">
             <nav class="step-nav" id="stepnav-chair">
@@ -307,6 +314,7 @@
                 <a href="#chair-invite"><span class="sn-num">2</span> Invite Members</a>
                 <a href="#chair-schedule"><span class="sn-num">3</span> Schedule Meetings</a>
                 <a href="#chair-drive"><span class="sn-num">4</span> Access Your Drive</a>
+                <a href="#chair-connect"><span class="sn-num">5</span> Stay Connected</a>
                 <a href="#chair-faq"><span class="sn-num">?</span> FAQ</a>
             </nav>
 
@@ -478,6 +486,34 @@
                 <div class="mark-done" onclick="toggleDone(this,'chair-4')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
+            <!-- Step 5: Stay Connected -->
+            <section class="step-section" id="chair-connect" data-step="chair-5">
+                <div class="step-node">5</div>
+                <div class="step-eyebrow">Step 5</div>
+                <h3>Stay Connected with PAWSIC</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Every chair follows PAWSIC on social media and subscribes to our newsletter. It takes two minutes.</span></div>
+
+                <div class="subhead">Subscribe to the newsletter</div>
+                <a class="action" href="https://pawsic.us11.list-manage.com/subscribe?u=3672b766f800144567b7aebbb&amp;id=bddbd43ac2" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></span><span class="a-txt"><b>Subscribe to the PAWSIC newsletter</b><span>Monthly clinical and community updates</span></span><span class="a-go">&#8594;</span></a>
+
+                <div class="subhead">Follow PAWSIC on social</div>
+                <div class="social-row">
+                    <a class="soc" href="https://www.linkedin.com/company/pawsic/" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></span>LinkedIn</a>
+                    <a class="soc" href="https://www.instagram.com/pawsic_org/" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></span>Instagram</a>
+                    <a class="soc" href="https://www.facebook.com/profile.php?id=100064724872333" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3h-3a4 4 0 00-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></span>Facebook</a>
+                    <a class="soc" href="https://www.youtube.com/@PAWSIC-Team" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 00-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5A2.5 2.5 0 001.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 001.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5a2.5 2.5 0 001.8-1.8C23 15.2 23 12 23 12zM10 15.5v-7l6 3.5z"/></svg></span>YouTube</a>
+                    <a class="soc" href="https://x.com/PAWSIC1" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7.5 8.6L22 22h-6.8l-4.7-6.2L5 22H2l8-9.2L2.2 2H9l4.3 5.7zM16.8 20h1.7L7.3 3.8H5.5z"/></svg></span>X</a>
+                    <a class="soc" href="https://www.tiktok.com/@pawsic.org" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.35 2.1 1.6 3.7 3.7 3.95v2.75c-1.35.13-2.6-.3-3.7-1.05v6.15A5.6 5.6 0 1110.4 9.6c.3 0 .6.02.9.07v2.85a2.8 2.8 0 102 2.7V3z"/></svg></span>TikTok</a>
+                </div>
+
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~2 min</b></span></div>
+                    <div class="cl-item" data-k="c5a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Follow PAWSIC on LinkedIn, Instagram, and Facebook</span></div>
+                    <div class="cl-item" data-k="c5b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Subscribe to the PAWSIC newsletter</span></div>
+                </div>
+                <div class="mark-done" onclick="toggleDone(this,'chair-5')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
+            </section>
+
             <!-- FAQ -->
             <section class="step-section" id="chair-faq" style="padding-bottom:1rem;">
                 <div class="step-node" style="background:linear-gradient(150deg,var(--navy),var(--indigo));color:#fff;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
@@ -500,11 +536,11 @@
         <div class="track-banner">
             <div class="container">
                 <h2>Board Member Onboarding</h2>
-                <p>Five steps to get you oriented, official, and ready to serve.</p>
+                <p>Six steps to get you oriented, official, and ready to serve.</p>
                 <a class="switch" onclick="setRole('chair')">&#8596; I'm actually a SIG Chair</a>
             </div>
         </div>
-        <div class="progress-wrap"><div class="container progress-inner"><div class="progress-track"><div class="progress-fill" id="progress-board"></div></div><div class="progress-label" id="progress-label-board">0 of 5 complete</div></div></div>
+        <div class="progress-wrap"><div class="container progress-inner"><div class="progress-track"><div class="progress-fill" id="progress-board"></div></div><div class="progress-label" id="progress-label-board">0 of 6 complete</div></div></div>
 
         <div class="container">
             <nav class="step-nav" id="stepnav-board">
@@ -513,6 +549,7 @@
                 <a href="#board-docs"><span class="sn-num">3</span> Documents &amp; Forms</a>
                 <a href="#board-bio"><span class="sn-num">4</span> Bio &amp; Headshot</a>
                 <a href="#board-calendar"><span class="sn-num">5</span> Calendar &amp; Contacts</a>
+                <a href="#board-connect"><span class="sn-num">6</span> Stay Connected</a>
                 <a href="#board-drive"><span class="sn-num">+</span> Portal Access</a>
             </nav>
 
@@ -632,6 +669,34 @@
                 <div class="mark-done" onclick="toggleDone(this,'board-5')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
+            <!-- Step 6: Stay Connected -->
+            <section class="step-section" id="board-connect" data-step="board-6">
+                <div class="step-node">6</div>
+                <div class="step-eyebrow">Step 6</div>
+                <h3>Stay Connected with PAWSIC</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Every Board member follows PAWSIC on social media and subscribes to our newsletter. It takes two minutes.</span></div>
+
+                <div class="subhead">Subscribe to the newsletter</div>
+                <a class="action gold" href="https://pawsic.us11.list-manage.com/subscribe?u=3672b766f800144567b7aebbb&amp;id=bddbd43ac2" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg></span><span class="a-txt"><b>Subscribe to the PAWSIC newsletter</b><span>Monthly clinical and community updates</span></span><span class="a-go">&#8594;</span></a>
+
+                <div class="subhead">Follow PAWSIC on social</div>
+                <div class="social-row">
+                    <a class="soc" href="https://www.linkedin.com/company/pawsic/" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></span>LinkedIn</a>
+                    <a class="soc" href="https://www.instagram.com/pawsic_org/" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></span>Instagram</a>
+                    <a class="soc" href="https://www.facebook.com/profile.php?id=100064724872333" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 3h-3a4 4 0 00-4 4v3H5v4h3v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></span>Facebook</a>
+                    <a class="soc" href="https://www.youtube.com/@PAWSIC-Team" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 00-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5A2.5 2.5 0 001.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 001.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5a2.5 2.5 0 001.8-1.8C23 15.2 23 12 23 12zM10 15.5v-7l6 3.5z"/></svg></span>YouTube</a>
+                    <a class="soc" href="https://x.com/PAWSIC1" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7.5 8.6L22 22h-6.8l-4.7-6.2L5 22H2l8-9.2L2.2 2H9l4.3 5.7zM16.8 20h1.7L7.3 3.8H5.5z"/></svg></span>X</a>
+                    <a class="soc" href="https://www.tiktok.com/@pawsic.org" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.35 2.1 1.6 3.7 3.7 3.95v2.75c-1.35.13-2.6-.3-3.7-1.05v6.15A5.6 5.6 0 1110.4 9.6c.3 0 .6.02.9.07v2.85a2.8 2.8 0 102 2.7V3z"/></svg></span>TikTok</a>
+                </div>
+
+                <div class="checklist">
+                    <div class="cl-head"><span class="cl-title">Your checklist</span><span class="cl-meta"><b>~2 min</b></span></div>
+                    <div class="cl-item" data-k="b6a" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Follow PAWSIC on LinkedIn, Instagram, and Facebook</span></div>
+                    <div class="cl-item" data-k="b6b" onclick="toggleCheck(this)"><span class="cl-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="cl-txt">Subscribe to the PAWSIC newsletter</span></div>
+                </div>
+                <div class="mark-done" onclick="toggleDone(this,'board-6')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
+            </section>
+
             <!-- Portal -->
             <section class="step-section" id="board-drive" style="padding-bottom:1rem;">
                 <div class="step-node"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
@@ -682,7 +747,7 @@
         function copyEmail(btn){var text=document.getElementById('chair-email-body').innerText;navigator.clipboard.writeText(text).then(function(){var old=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=old;},1800);});}
         function getChecks(){try{return JSON.parse(localStorage.getItem('pawsic_checks')||'{}');}catch(e){return {};}}
         function toggleCheck(el){var k=el.getAttribute('data-k');el.classList.toggle('done');var c=getChecks();c[k]=el.classList.contains('done');try{localStorage.setItem('pawsic_checks',JSON.stringify(c));}catch(e){}}
-        var STEPS={chair:['chair-1','chair-2','chair-3','chair-4'],board:['board-1','board-2','board-3','board-4','board-5']};
+        var STEPS={chair:['chair-1','chair-2','chair-3','chair-4','chair-5'],board:['board-1','board-2','board-3','board-4','board-5','board-6']};
         function getDone(){try{return JSON.parse(localStorage.getItem('pawsic_done')||'{}');}catch(e){return {};}}
         function toggleDone(el,key){var done=getDone();done[key]=!done[key];try{localStorage.setItem('pawsic_done',JSON.stringify(done));}catch(e){}el.classList.toggle('done',!!done[key]);el.childNodes[el.childNodes.length-1].nodeValue=done[key]?' Completed':' Mark this step complete';refreshProgress(key.split('-')[0]);}
         function refreshProgress(role){if(role!=='chair'&&role!=='board')return;var done=getDone();var steps=STEPS[role];var count=steps.filter(function(s){return done[s];}).length;var pct=Math.round(count/steps.length*100);var fill=document.getElementById('progress-'+role);var label=document.getElementById('progress-label-'+role);if(fill)fill.style.width=pct+'%';if(label)label.textContent=count+' of '+steps.length+' complete';var nav=document.getElementById('stepnav-'+role);if(nav){var links=nav.querySelectorAll('a');steps.forEach(function(s,i){if(links[i])links[i].classList.toggle('done',!!done[s]);});}}
