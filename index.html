@@ -9,362 +9,227 @@
     <meta name="robots" content="noindex, nofollow">
     <title>PAWSIC Onboarding Hub</title>
     <style>
-        :root {
-            --navy: #0C1F3F;
-            --indigo: #1E3A6E;
-            --logo-blue: #1A5494;
-            --blue: #2B7CCA;
-            --blue-bright: #38B6FF;
-            --gold: #C9A84C;
-            --gold-deep: #B8963F;
-            --cream: #FAF8F4;
-            --charcoal: #2D3748;
-            --gray: #4A5568;
-            --border: #E8ECF1;
-            --light-bg: #F7F8FA;
-            --header-h: 68px;
-            --base: 17px;
+        :root{
+            --navy:#0C1F3F; --indigo:#1E3A6E; --logo-blue:#1A5494; --blue:#2B7CCA; --blue-bright:#38B6FF;
+            --gold:#C9A84C; --gold-deep:#B8963F; --cream:#FAF8F4; --charcoal:#2D3748; --gray:#4A5568;
+            --border:#E8ECF1; --light-bg:#F7F8FA; --ice:#EEF5F8; --header-h:68px; --base:18px;
+            --accent:var(--blue); --accent-soft:#EAF3FB;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{font-size:var(--base);scroll-behavior:smooth;}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;line-height:1.65;color:var(--charcoal);background:#fff;}
+        .container{max-width:1100px;margin:0 auto;padding:0 1.5rem;}
+        a{color:var(--blue);}
+
+        /* Header */
+        .site-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;}
+        .site-header .container{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:var(--header-h);flex-wrap:wrap;padding-top:.6rem;padding-bottom:.6rem;}
+        .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;color:var(--navy);}
+        .brand-mark{width:38px;height:38px;border-radius:9px;background:linear-gradient(135deg,var(--navy),var(--logo-blue));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.8rem;letter-spacing:.5px;}
+        .brand-text b{display:block;font-size:1rem;font-weight:700;color:var(--navy);line-height:1.1;}
+        .brand-text span{display:block;font-size:.72rem;color:var(--gray);font-weight:500;}
+        .header-controls{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+        .role-toggle{display:none;background:var(--light-bg);border:1px solid var(--border);border-radius:999px;padding:3px;}
+        body.role-chair .role-toggle,body.role-board .role-toggle{display:inline-flex;}
+        .role-toggle button{border:none;background:transparent;cursor:pointer;padding:.45rem 1rem;border-radius:999px;font-size:.9rem;font-weight:600;color:var(--gray);font-family:inherit;transition:all .2s;}
+        body.role-chair .role-toggle button[data-role="chair"]{background:var(--blue);color:#fff;}
+        body.role-board .role-toggle button[data-role="board"]{background:var(--gold);color:var(--navy);}
+        .text-size{display:flex;align-items:center;gap:.35rem;}
+        .text-size span{font-size:.72rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+        .text-size button{border:1px solid var(--border);background:#fff;cursor:pointer;width:30px;height:30px;border-radius:6px;color:var(--navy);font-family:inherit;font-weight:700;transition:all .2s;}
+        .text-size button:hover{border-color:var(--blue);color:var(--blue);}
+        .text-size button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+        .text-size button:nth-child(2){font-size:.75rem;}.text-size button:nth-child(3){font-size:.95rem;}.text-size button:nth-child(4){font-size:1.1rem;}
+
+        /* Hero / role selection (unchanged look) */
+        .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--logo-blue) 100%);color:#fff;padding:3.5rem 1.5rem 3rem;text-align:center;}
+        .hero h1{font-size:2.4rem;font-weight:700;margin-bottom:.8rem;letter-spacing:-.02em;}
+        .hero .lead{font-size:1.15rem;opacity:.95;max-width:680px;margin:0 auto .6rem;}
+        .hero .meta{font-size:.95rem;opacity:.8;}
+        .role-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:820px;margin:2.5rem auto 0;}
+        .role-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:2rem 1.75rem;text-align:left;cursor:pointer;transition:all .25s;color:#fff;font-family:inherit;}
+        .role-card:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);border-color:rgba(255,255,255,.4);}
+        .role-card .rc-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;}
+        .role-card.chair .rc-icon{background:var(--blue);}.role-card.board .rc-icon{background:var(--gold);}
+        .role-card h3{font-size:1.35rem;margin-bottom:.5rem;font-weight:700;}
+        .role-card p{font-size:.95rem;opacity:.9;margin-bottom:1.25rem;line-height:1.6;}
+        .role-card .rc-go{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;font-size:.95rem;}
+        .role-card.chair .rc-go{color:var(--blue-bright);}.role-card.board .rc-go{color:var(--gold);}
+        body.role-chair .hero,body.role-board .hero{display:none;}
+
+        /* Tracks */
+        .track{display:none;}
+        body.role-chair #track-chair{display:block;}
+        body.role-board #track-board{display:block;}
+        #track-chair{--accent:var(--blue);--accent-soft:#EAF3FB;--accent-deep:var(--logo-blue);}
+        #track-board{--accent:var(--gold);--accent-soft:#FBF6E9;--accent-deep:var(--gold-deep);}
+        .track-banner{padding:2rem 0;color:#fff;}
+        #track-chair .track-banner{background:linear-gradient(135deg,var(--navy),var(--logo-blue));}
+        #track-board .track-banner{background:linear-gradient(135deg,var(--navy),var(--indigo));border-bottom:4px solid var(--gold);}
+        .track-banner h2{font-size:1.8rem;font-weight:700;margin-bottom:.25rem;letter-spacing:-.02em;}
+        .track-banner p{opacity:.9;font-size:1.05rem;}
+        .track-banner .switch{display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:.4rem .9rem;border-radius:999px;font-size:.85rem;cursor:pointer;font-family:inherit;font-weight:600;text-decoration:none;}
+        .track-banner .switch:hover{background:rgba(255,255,255,.22);}
+
+        /* Progress */
+        .progress-wrap{background:var(--light-bg);border-bottom:1px solid var(--border);padding:1rem 0;position:sticky;top:var(--header-h);z-index:150;}
+        .progress-inner{display:flex;align-items:center;gap:1rem;}
+        .progress-track{flex:1;height:10px;background:var(--border);border-radius:999px;overflow:hidden;}
+        .progress-fill{height:100%;width:0;border-radius:999px;transition:width .4s ease;background:var(--accent);}
+        .progress-label{font-size:.85rem;font-weight:700;color:var(--navy);white-space:nowrap;}
+
+        /* Step chips nav */
+        .step-nav{display:flex;gap:.5rem;flex-wrap:wrap;padding:1.5rem 0 .5rem;}
+        .step-nav a{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .9rem;border-radius:999px;text-decoration:none;font-size:.88rem;font-weight:600;color:var(--gray);background:var(--light-bg);border:1px solid var(--border);transition:all .2s;}
+        .step-nav a:hover{color:var(--navy);border-color:var(--accent);}
+        .step-nav a .sn-num{width:20px;height:20px;border-radius:50%;background:var(--border);color:var(--navy);font-size:.72rem;display:inline-flex;align-items:center;justify-content:center;font-weight:700;}
+        .step-nav a.done .sn-num{background:#2E9E6A;color:#fff;}
+
+        /* ===== JOURNEY / TIMELINE ===== */
+        .journey{position:relative;padding:1.5rem 0 1rem;}
+        .journey::before{content:'';position:absolute;left:31px;top:56px;bottom:120px;width:3px;background:linear-gradient(var(--accent),var(--accent) 70%,transparent);opacity:.35;border-radius:2px;}
+        .step-section{position:relative;padding:1.75rem 0 2.5rem 92px;scroll-margin-top:calc(var(--header-h) + 84px);}
+        .step-node{position:absolute;left:0;top:1.75rem;width:64px;height:64px;border-radius:20px;background:linear-gradient(150deg,var(--accent),var(--accent-deep));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.7rem;box-shadow:0 1px 2px rgba(12,31,63,.10),0 10px 24px rgba(12,31,63,.14);z-index:1;}
+        #track-board .step-node{color:var(--navy);}
+        .step-eyebrow{font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;color:var(--accent-deep);}
+        #track-board .step-eyebrow{color:var(--gold-deep);}
+        .step-section h3{font-size:1.55rem;color:var(--navy);font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-top:.1rem;}
+        .step-body{margin-top:1.1rem;}
+        .step-body>p{font-size:1.08rem;color:var(--charcoal);line-height:1.75;margin-bottom:1rem;max-width:60ch;}
+        @media(max-width:640px){
+            .journey::before{left:23px;}
+            .step-section{padding-left:0;padding-top:4.75rem;}
+            .step-node{width:46px;height:46px;border-radius:14px;font-size:1.2rem;top:0;}
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* In-short chip */
+        .tldr{display:flex;gap:.7rem;align-items:flex-start;background:var(--accent-soft);border:1px solid var(--border);border-left:6px solid var(--accent);border-radius:12px;padding:1rem 1.2rem;margin-bottom:1.5rem;font-size:1.1rem;line-height:1.6;color:var(--charcoal);max-width:640px;}
+        .tldr .tldr-dot{flex:0 0 auto;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;margin-top:.1rem;}
+        #track-board .tldr .tldr-dot{color:var(--navy);}
+        .tldr b{color:var(--navy);}
 
-        html { font-size: var(--base); scroll-behavior: smooth; }
+        /* Fact chips */
+        .facts{display:flex;flex-wrap:wrap;gap:.7rem;margin:0 0 1.5rem;}
+        .fact{display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--border);border-radius:12px;padding:.7rem 1rem;box-shadow:0 1px 2px rgba(12,31,63,.05);}
+        .fact .fx-num{font-size:1.5rem;font-weight:800;color:var(--navy);line-height:1;letter-spacing:-.02em;}
+        .fact .fx-lab{font-size:.86rem;color:var(--gray);font-weight:600;line-height:1.2;}
+        .fact svg{width:26px;height:26px;color:var(--accent);}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.65;
-            color: var(--charcoal);
-            background-color: #FFFFFF;
-        }
+        /* Flow-map (visual process) */
+        .flowwrap{margin:.5rem 0 1.75rem;}
+        .flowtitle{font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--gray);margin-bottom:.9rem;}
+        .flowmap{display:flex;align-items:stretch;gap:.5rem;flex-wrap:wrap;}
+        .fm-step{flex:1 1 150px;min-width:140px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.1rem .95rem;text-align:center;box-shadow:0 1px 2px rgba(12,31,63,.05);position:relative;}
+        .fm-ico{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent-deep);display:flex;align-items:center;justify-content:center;margin:0 auto .6rem;}
+        #track-board .fm-ico{color:var(--gold-deep);}
+        .fm-ico svg{width:24px;height:24px;}
+        .fm-k{position:absolute;top:8px;left:10px;font-size:.72rem;font-weight:800;color:var(--accent-deep);opacity:.55;}
+        .fm-t{font-size:.98rem;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:.2rem;}
+        .fm-d{font-size:.84rem;color:var(--gray);line-height:1.35;}
+        .fm-arrow{align-self:center;color:var(--accent);flex:0 0 auto;display:flex;align-items:center;}
+        .fm-arrow svg{width:22px;height:22px;}
+        @media(max-width:640px){.fm-arrow{transform:rotate(90deg);}.fm-step{flex-basis:100%;}}
 
-        .container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
+        /* Action tile (primary link) */
+        .action{display:flex;align-items:center;gap:1rem;background:linear-gradient(135deg,var(--navy),var(--logo-blue));color:#fff;border-radius:16px;padding:1.15rem 1.3rem;text-decoration:none;margin:.4rem 0 1.1rem;box-shadow:0 1px 2px rgba(12,31,63,.10),0 10px 24px rgba(12,31,63,.12);transition:transform .2s;max-width:560px;}
+        .action:hover{transform:translateY(-2px);}
+        .action.gold{background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:var(--navy);}
+        .action.ghost{background:#fff;color:var(--navy);border:1px solid var(--border);box-shadow:0 1px 2px rgba(12,31,63,.05);}
+        .action .a-ico{flex:0 0 auto;width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;}
+        .action.gold .a-ico{background:rgba(12,31,63,.10);}
+        .action.ghost .a-ico{background:var(--accent-soft);color:var(--accent-deep);}
+        .action .a-ico svg{width:24px;height:24px;}
+        .action .a-txt{flex:1;}
+        .action .a-txt b{display:block;font-size:1.08rem;line-height:1.2;}
+        .action .a-txt span{font-size:.88rem;opacity:.85;}
+        .action .a-go{flex:0 0 auto;font-size:1.3rem;font-weight:700;}
+        .action.pending{background:#fff;color:var(--gray);border:2px dashed var(--border);box-shadow:none;cursor:default;}
+        .action.pending .a-ico{background:var(--light-bg);color:var(--gray);}
+        .action.pending .a-txt span{color:var(--accent-deep);text-transform:uppercase;font-size:.72rem;font-weight:700;letter-spacing:.5px;opacity:1;}
+        .action.pending .a-go{display:none;}
+        .action-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:.4rem 0 1.1rem;}
+        .action-row .action{margin:0;max-width:none;}
 
-        a { color: var(--blue); }
+        /* Icon-tile grid */
+        .icongrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1rem;margin:.4rem 0 1.2rem;}
+        .ig-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.2rem;box-shadow:0 1px 2px rgba(12,31,63,.05);}
+        .ig-ico{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent-deep);display:flex;align-items:center;justify-content:center;margin-bottom:.7rem;}
+        #track-board .ig-ico{color:var(--gold-deep);}
+        .ig-ico svg{width:24px;height:24px;}
+        .ig-item h5{font-size:1.02rem;color:var(--navy);font-weight:700;margin-bottom:.25rem;}
+        .ig-item p{font-size:.92rem;color:var(--gray);line-height:1.5;}
 
-        /* ===== Site Header ===== */
-        .site-header {
-            background-color: #FFFFFF;
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 200;
-        }
+        /* Section subhead */
+        .subhead{color:var(--navy);font-size:1.12rem;margin:1.6rem 0 .7rem;font-weight:700;}
 
-        .site-header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            min-height: var(--header-h);
-            flex-wrap: wrap;
-            padding-top: 0.6rem;
-            padding-bottom: 0.6rem;
-        }
+        /* Callouts */
+        .callout{border-radius:12px;padding:1.15rem 1.25rem;margin:1rem 0 1.2rem;max-width:640px;}
+        .callout.gold{background:var(--cream);border-left:5px solid var(--gold);}
+        .callout.blue{background:var(--ice);border-left:5px solid var(--logo-blue);}
+        .callout.warm{background:#FFF8E7;border-left:5px solid var(--gold);}
+        .callout h4{color:var(--navy);margin-bottom:.4rem;font-size:1.02rem;}
+        .callout p,.callout li{font-size:1.02rem;color:var(--charcoal);line-height:1.65;}
+        .callout ul,.callout ol{margin:.3rem 0 0 1.2rem;}
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-decoration: none;
-            color: var(--navy);
-        }
+        /* Mark done */
+        .mark-done{display:inline-flex;align-items:center;gap:.6rem;margin-top:.6rem;padding:.6rem 1.1rem;border-radius:10px;cursor:pointer;user-select:none;border:2px solid var(--border);background:#fff;font-weight:600;color:var(--gray);font-family:inherit;font-size:.95rem;transition:all .2s;}
+        .mark-done:hover{border-color:#2E9E6A;color:#2E9E6A;}
+        .mark-done .md-box{width:20px;height:20px;border-radius:5px;border:2px solid currentColor;display:inline-flex;align-items:center;justify-content:center;}
+        .mark-done .md-box svg{opacity:0;width:12px;height:12px;}
+        .mark-done.done{background:#EAF7F0;border-color:#2E9E6A;color:#1E7A4F;}
+        .mark-done.done .md-box{background:#2E9E6A;border-color:#2E9E6A;}
+        .mark-done.done .md-box svg{opacity:1;}
 
-        .brand-mark {
-            width: 38px; height: 38px;
-            border-radius: 9px;
-            background: linear-gradient(135deg, var(--navy), var(--logo-blue));
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-weight: 800; font-size: 0.85rem; letter-spacing: 0.5px;
-        }
+        /* Email sample */
+        .email-sample{background:var(--light-bg);border:1px solid var(--border);border-radius:14px;padding:1.6rem;margin:.4rem 0 1rem;position:relative;max-width:640px;}
+        .email-sample p{margin-bottom:.85rem;font-size:1rem;color:var(--charcoal);line-height:1.65;}
+        .email-sample ol{margin:.3rem 0 .85rem 1.3rem;}
+        .copy-btn{position:absolute;top:1rem;right:1rem;background:var(--navy);color:#fff;border:none;border-radius:8px;padding:.5rem .95rem;font-size:.82rem;font-weight:700;cursor:pointer;font-family:inherit;}
+        .copy-btn:hover{background:var(--logo-blue);}
+        code{background:#fff;padding:.15rem .45rem;border-radius:5px;font-size:.9em;color:var(--navy);font-family:'Courier New',monospace;border:1px solid var(--border);}
 
-        .brand-text b { display: block; font-size: 1rem; font-weight: 700; color: var(--navy); line-height: 1.1; }
-        .brand-text span { display: block; font-size: 0.72rem; color: var(--gray); font-weight: 500; }
-
-        .header-controls { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-
-        /* Role toggle (header) */
-        .role-toggle { display: none; background: var(--light-bg); border: 1px solid var(--border); border-radius: 999px; padding: 3px; }
-        body.role-chair .role-toggle, body.role-board .role-toggle { display: inline-flex; }
-        .role-toggle button {
-            border: none; background: transparent; cursor: pointer;
-            padding: 0.45rem 1rem; border-radius: 999px; font-size: 0.9rem; font-weight: 600;
-            color: var(--gray); font-family: inherit; transition: all 0.2s;
-        }
-        body.role-chair .role-toggle button[data-role="chair"] { background: var(--blue); color: #fff; }
-        body.role-board .role-toggle button[data-role="board"] { background: var(--gold); color: var(--navy); }
-
-        /* Text size control */
-        .text-size { display: flex; align-items: center; gap: 0.35rem; }
-        .text-size span { font-size: 0.72rem; color: var(--gray); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-        .text-size button {
-            border: 1px solid var(--border); background: #fff; cursor: pointer;
-            width: 30px; height: 30px; border-radius: 6px; color: var(--navy); font-family: inherit;
-            font-weight: 700; transition: all 0.2s;
-        }
-        .text-size button:hover { border-color: var(--blue); color: var(--blue); }
-        .text-size button.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-        .text-size button:nth-child(2) { font-size: 0.75rem; }
-        .text-size button:nth-child(3) { font-size: 0.95rem; }
-        .text-size button:nth-child(4) { font-size: 1.1rem; }
-
-        /* ===== Hero / Role selection ===== */
-        .hero {
-            background: linear-gradient(135deg, var(--navy) 0%, var(--logo-blue) 100%);
-            color: #fff;
-            padding: 3.5rem 1.5rem 3rem;
-            text-align: center;
-        }
-        .hero h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 0.8rem; }
-        .hero .lead { font-size: 1.15rem; opacity: 0.95; max-width: 680px; margin: 0 auto 0.6rem; }
-        .hero .meta { font-size: 0.95rem; opacity: 0.8; }
-
-        .role-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 820px;
-            margin: 2.5rem auto 0;
-        }
-        .role-card {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.18);
-            border-radius: 14px;
-            padding: 2rem 1.75rem;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.25s;
-            color: #fff;
-            font-family: inherit;
-        }
-        .role-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); border-color: rgba(255,255,255,0.4); }
-        .role-card .rc-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
-        .role-card.chair .rc-icon { background: var(--blue); }
-        .role-card.board .rc-icon { background: var(--gold); }
-        .role-card h3 { font-size: 1.35rem; margin-bottom: 0.5rem; font-weight: 700; }
-        .role-card p { font-size: 0.95rem; opacity: 0.9; margin-bottom: 1.25rem; line-height: 1.6; }
-        .role-card .rc-go { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; font-size: 0.95rem; }
-        .role-card.chair .rc-go { color: var(--blue-bright); }
-        .role-card.board .rc-go { color: var(--gold); }
-
-        /* Hide hero once a role is chosen (keep switchable via header) */
-        body.role-chair .hero, body.role-board .hero { display: none; }
-
-        /* ===== Tracks ===== */
-        .track { display: none; }
-        body.role-chair #track-chair { display: block; }
-        body.role-board #track-board { display: block; }
-
-        .track-banner {
-            padding: 1.75rem 0;
-            color: #fff;
-        }
-        #track-chair .track-banner { background: linear-gradient(135deg, var(--navy), var(--logo-blue)); }
-        #track-board .track-banner { background: linear-gradient(135deg, var(--navy), var(--indigo)); border-bottom: 4px solid var(--gold); }
-        .track-banner h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 0.25rem; }
-        .track-banner p { opacity: 0.9; font-size: 1rem; }
-        .track-banner .switch {
-            display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.9rem;
-            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
-            color: #fff; padding: 0.4rem 0.9rem; border-radius: 999px; font-size: 0.85rem;
-            cursor: pointer; font-family: inherit; font-weight: 600; text-decoration: none;
-        }
-        .track-banner .switch:hover { background: rgba(255,255,255,0.22); }
-
-        /* Progress bar */
-        .progress-wrap { background: var(--light-bg); border-bottom: 1px solid var(--border); padding: 1rem 0; position: sticky; top: var(--header-h); z-index: 150; }
-        .progress-inner { display: flex; align-items: center; gap: 1rem; }
-        .progress-track { flex: 1; height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; }
-        .progress-fill { height: 100%; width: 0; border-radius: 999px; transition: width 0.4s ease; }
-        #track-chair .progress-fill { background: var(--blue); }
-        #track-board .progress-fill { background: var(--gold); }
-        .progress-label { font-size: 0.85rem; font-weight: 700; color: var(--navy); white-space: nowrap; }
-
-        /* Step nav (jump links) */
-        .step-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; padding: 1.25rem 0; }
-        .step-nav a {
-            display: inline-flex; align-items: center; gap: 0.45rem;
-            padding: 0.5rem 0.9rem; border-radius: 999px; text-decoration: none;
-            font-size: 0.88rem; font-weight: 600; color: var(--gray);
-            background: var(--light-bg); border: 1px solid var(--border); transition: all 0.2s;
-        }
-        .step-nav a:hover { color: var(--navy); border-color: var(--blue); }
-        .step-nav a .sn-num { width: 20px; height: 20px; border-radius: 50%; background: var(--border); color: var(--navy); font-size: 0.72rem; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
-        .step-nav a.done .sn-num { background: #2E9E6A; color: #fff; }
-
-        /* ===== Step sections ===== */
-        .step-section { padding: 2.25rem 0; border-bottom: 1px solid var(--border); scroll-margin-top: calc(var(--header-h) + 70px); }
-        .step-head { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
-        .step-icon {
-            flex: 0 0 auto; width: 52px; height: 52px; border-radius: 12px;
-            display: flex; align-items: center; justify-content: center; color: #fff;
-        }
-        #track-chair .step-icon { background: var(--blue); }
-        #track-board .step-icon { background: var(--gold); }
-        .step-head .st-titles { flex: 1; }
-        .step-eyebrow { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); }
-        #track-chair .step-eyebrow { color: var(--blue); }
-        #track-board .step-eyebrow { color: var(--gold-deep); }
-        .step-head h3 { font-size: 1.5rem; color: var(--navy); font-weight: 700; line-height: 1.2; }
-        .step-body { padding-left: calc(52px + 1rem); }
-        .step-body > p { margin-bottom: 1rem; color: var(--gray); font-size: 1.02rem; }
-        .step-body h4 { color: var(--navy); font-size: 1.1rem; margin: 1.5rem 0 0.6rem; font-weight: 700; }
-        .step-body ul, .step-body ol { margin: 0 0 1rem 1.4rem; }
-        .step-body li { margin-bottom: 0.5rem; }
-
-        @media (max-width: 640px) {
-            .step-body { padding-left: 0; }
-        }
-
-        /* ===== ADHD / brain-fog readability ===== */
-        /* Shorter lines, bigger and darker copy, more breathing room. */
-        .step-section { padding: 3.25rem 0; }
-        .step-body { max-width: 900px; }
-        .step-body > p { font-size: 1.14rem; color: var(--charcoal); line-height: 1.8; margin-bottom: 1.2rem; max-width: 66ch; }
-        .step-body h4 { font-size: 1.22rem; margin-top: 2.1rem; margin-bottom: 0.7rem; }
-        .step-body ul, .step-body ol { max-width: 66ch; margin-left: 1.5rem; }
-        .step-body li { margin-bottom: 0.7rem; font-size: 1.08rem; color: var(--charcoal); line-height: 1.75; }
-
-        /* One-line plain-language summary at the top of each step */
-        .step-tldr {
-            display: flex; gap: 0.75rem; align-items: flex-start;
-            background: #F1F6FB; border: 1px solid var(--border); border-left: 6px solid var(--blue);
-            border-radius: 12px; padding: 1.05rem 1.25rem; margin-bottom: 1.7rem;
-            font-size: 1.12rem; line-height: 1.65; color: var(--charcoal); max-width: 720px;
-        }
-        #track-board .step-tldr { background: #FBF7EC; border-left-color: var(--gold); }
-        .step-tldr b { color: var(--navy); }
-        .step-tldr .tldr-dot {
-            flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
-            background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 0.9rem; margin-top: 0.15rem;
-        }
-        #track-board .step-tldr .tldr-dot { background: var(--gold); color: var(--navy); }
-
-        /* Darken and enlarge the supporting copy inside boxes */
-        .callout p, .callout li { font-size: 1.06rem; color: var(--charcoal); line-height: 1.75; }
-        .card p { font-size: 1.02rem; color: var(--charcoal); line-height: 1.65; }
-        .flow-step p { font-size: 1.02rem; color: var(--charcoal); line-height: 1.7; }
-        .flow-step h5 { font-size: 1.12rem; }
-        .faq-item p { font-size: 1.06rem; color: var(--charcoal); line-height: 1.75; }
-        .faq-item h4 { font-size: 1.12rem; }
-        .accordion-body p { font-size: 1.04rem; color: var(--charcoal); line-height: 1.75; }
-        .email-sample p { font-size: 1.04rem; color: var(--charcoal); line-height: 1.7; }
-
-        /* Mark done control */
-        .mark-done {
-            display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.25rem;
-            padding: 0.6rem 1.1rem; border-radius: 8px; cursor: pointer; user-select: none;
-            border: 2px solid var(--border); background: #fff; font-weight: 600; color: var(--gray);
-            font-family: inherit; font-size: 0.95rem; transition: all 0.2s;
-        }
-        .mark-done:hover { border-color: #2E9E6A; color: #2E9E6A; }
-        .mark-done .md-box { width: 20px; height: 20px; border-radius: 5px; border: 2px solid currentColor; display: inline-flex; align-items: center; justify-content: center; }
-        .mark-done .md-box svg { opacity: 0; }
-        .mark-done.done { background: #EAF7F0; border-color: #2E9E6A; color: #1E7A4F; }
-        .mark-done.done .md-box { background: #2E9E6A; border-color: #2E9E6A; }
-        .mark-done.done .md-box svg { opacity: 1; }
-
-        /* Cards */
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin: 1.25rem 0; }
-        .card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; flex-direction: column; transition: all 0.2s; }
-        .card:hover { box-shadow: 0 6px 18px rgba(12,31,63,0.08); transform: translateY(-2px); }
-        .card h5 { color: var(--navy); font-size: 1.1rem; margin-bottom: 0.6rem; font-weight: 700; }
-        .card p { flex-grow: 1; font-size: 0.95rem; color: var(--gray); margin-bottom: 1.1rem; }
-
-        /* Buttons */
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; background: var(--blue); color: #fff; padding: 0.8rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.95rem; border: none; cursor: pointer; font-family: inherit; transition: background 0.2s; }
-        .btn:hover { background: var(--logo-blue); }
-        .btn.gold { background: var(--gold); color: var(--navy); }
-        .btn.gold:hover { background: var(--gold-deep); }
-        .btn-arrow::after { content: '\2192'; font-size: 1.05rem; }
-
-        .btn-pending { background: #fff; color: var(--gray); border: 2px dashed var(--border); cursor: default; flex-direction: column; align-items: flex-start; gap: 0.1rem; padding: 0.7rem 1.3rem; }
-        .btn-pending:hover { background: #fff; }
-        .btn-pending small { font-size: 0.72rem; font-weight: 600; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; }
-
-        /* Numbered workflow (governance) */
-        .flow { display: grid; gap: 1rem; margin: 1.25rem 0; }
-        .flow-step { background: var(--light-bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
-        .flow-num { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; }
-        #track-board .flow-num { background: var(--gold); color: var(--navy); }
-        .flow-step h5 { color: var(--navy); font-size: 1.05rem; margin-bottom: 0.35rem; font-weight: 700; }
-        .flow-step p { font-size: 0.95rem; color: var(--gray); margin: 0; }
-
-        /* Callout boxes */
-        .callout { border-radius: 10px; padding: 1.5rem; margin: 1.25rem 0; }
-        .callout.blue { background: #E8F4F8; border-left: 4px solid var(--logo-blue); }
-        .callout.gold { background: #FBF6E9; border-left: 4px solid var(--gold); }
-        .callout.warm { background: #FFF8E7; border-left: 4px solid var(--gold); }
-        .callout h4 { color: var(--navy); margin-bottom: 0.6rem; font-size: 1.05rem; }
-        .callout ol, .callout ul { margin: 0.5rem 0 0 1.4rem; }
-        .callout li { margin-bottom: 0.5rem; }
-
-        /* Big ROOT link */
-        .root-link {
-            display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-            background: linear-gradient(135deg, var(--navy), var(--logo-blue)); color: #fff;
-            border-radius: 12px; padding: 1.5rem 1.75rem; margin: 1.25rem 0; text-decoration: none;
-            transition: transform 0.2s;
-        }
-        .root-link:hover { transform: translateY(-2px); }
-        .root-link .rl-text b { font-size: 1.2rem; display: block; }
-        .root-link .rl-text span { opacity: 0.85; font-size: 0.9rem; }
-        .root-link .rl-url { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 0.7rem 1.3rem; border-radius: 8px; font-weight: 700; font-size: 1.05rem; white-space: nowrap; }
-
-        /* Scheduler / video */
-        .scheduler-iframe { width: 100%; height: 560px; border: 1px solid var(--border); border-radius: 10px; margin-top: 1.25rem; }
-        .video-frame { padding: 60.59% 0 0 0; position: relative; width: 100%; margin: 1.25rem 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
-        .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        code { background: var(--light-bg); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.9em; color: var(--navy); font-family: 'Courier New', monospace; }
-
-        /* Email sample + copy */
-        .email-sample { background: var(--light-bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; margin: 1.25rem 0; position: relative; }
-        .email-sample p { margin-bottom: 0.9rem; font-size: 0.98rem; }
-        .copy-btn { position: absolute; top: 1rem; right: 1rem; background: var(--navy); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 0.9rem; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: inherit; }
-        .copy-btn:hover { background: var(--logo-blue); }
+        /* Video + scheduler */
+        .video-frame{padding:56.25% 0 0 0;position:relative;width:100%;margin:.6rem 0 1.2rem;border-radius:14px;overflow:hidden;border:1px solid var(--border);max-width:640px;}
+        .video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+        .scheduler-iframe{width:100%;height:560px;border:1px solid var(--border);border-radius:14px;margin-top:.6rem;}
 
         /* Accordion */
-        .accordion { background: var(--light-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 0.75rem 0; }
-        .accordion-header { padding: 1.15rem 1.35rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-weight: 600; color: var(--navy); user-select: none; }
-        .accordion-header:hover { background: #EEF2F7; }
-        .accordion-toggle { color: var(--blue); font-size: 1.2rem; transition: transform 0.3s; flex: 0 0 auto; }
-        .accordion-header.active .accordion-toggle { transform: rotate(180deg); }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: #fff; }
-        .accordion-content.active { max-height: 1200px; }
-        .accordion-body { padding: 1.35rem; }
-        .accordion-body p { margin-bottom: 0.9rem; color: var(--gray); }
-        .accordion-body h5 { color: var(--navy); margin: 1rem 0 0.4rem; }
+        .accordion{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:.6rem 0;max-width:640px;}
+        .accordion-header{padding:1.05rem 1.2rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-weight:600;color:var(--navy);user-select:none;font-size:1rem;}
+        .accordion-header:hover{background:var(--light-bg);}
+        .accordion-toggle{color:var(--accent);font-size:1.2rem;transition:transform .3s;flex:0 0 auto;}
+        .accordion-header.active .accordion-toggle{transform:rotate(180deg);}
+        .accordion-content{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+        .accordion-content.active{max-height:900px;}
+        .accordion-body{padding:0 1.2rem 1.2rem;}
+        .accordion-body p{margin-bottom:.7rem;color:var(--gray);font-size:.98rem;line-height:1.6;}
+        .accordion-body ol{margin:.3rem 0 0 1.3rem;color:var(--gray);}
 
         /* FAQ */
-        .faq-item { border-bottom: 1px solid var(--border); padding: 1.25rem 0; }
-        .faq-item:last-child { border-bottom: none; }
-        .faq-item h4 { color: var(--navy); margin-bottom: 0.5rem; font-size: 1.05rem; }
-        .faq-item p { color: var(--gray); }
+        .faq-item{border-bottom:1px solid var(--border);padding:1.15rem 0;max-width:700px;}
+        .faq-item:last-child{border-bottom:none;}
+        .faq-item h4{color:var(--navy);margin-bottom:.4rem;font-size:1.05rem;}
+        .faq-item p{color:var(--gray);font-size:1rem;line-height:1.6;}
 
-        /* Help strip */
-        .help-strip { background: var(--cream); border-radius: 12px; padding: 2.25rem; text-align: center; margin: 2.5rem 0; }
-        .help-strip h3 { color: var(--navy); font-size: 1.4rem; margin-bottom: 0.6rem; }
-        .help-strip p { color: var(--gray); margin-bottom: 1.25rem; }
+        /* Help + footer */
+        .help-strip{background:var(--cream);border-radius:16px;padding:2.25rem;text-align:center;margin:2.5rem 0;}
+        .help-strip h3{color:var(--navy);font-size:1.4rem;margin-bottom:.6rem;}
+        .help-strip p{color:var(--gray);margin-bottom:1.25rem;}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;background:var(--gold);color:var(--navy);padding:.85rem 1.6rem;border-radius:10px;text-decoration:none;font-weight:700;font-size:.98rem;border:none;cursor:pointer;font-family:inherit;}
+        .btn:hover{background:var(--gold-deep);}
+        .btn-arrow::after{content:'\2192';}
+        footer{background:var(--navy);color:#fff;text-align:center;padding:2.5rem 1.5rem;}
+        footer p{margin:.4rem 0;font-size:.9rem;opacity:.85;}
+        footer a{color:var(--blue-bright);text-decoration:none;}
 
-        /* Footer */
-        footer { background: var(--navy); color: #fff; text-align: center; padding: 2.5rem 1.5rem; }
-        footer p { margin: 0.4rem 0; font-size: 0.9rem; opacity: 0.85; }
-        footer a { color: var(--blue-bright); text-decoration: none; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.9rem; }
-            .step-head h3 { font-size: 1.3rem; }
-            .progress-wrap { position: static; }
+        @media(max-width:768px){
+            .hero h1{font-size:1.9rem;}
+            .step-section h3{font-size:1.3rem;}
+            .progress-wrap{position:static;}
         }
     </style>
 </head>
 <body class="role-none">
-    <!-- ===== Header ===== -->
     <header class="site-header">
         <div class="container">
             <a class="brand" href="#" onclick="goHome();return false;">
@@ -386,27 +251,21 @@
         </div>
     </header>
 
-    <!-- ===== Hero / Role selection ===== -->
+    <!-- Hero / role selection -->
     <section class="hero">
         <div class="container">
             <h1>Welcome to PAWSIC</h1>
             <p class="lead">This hub walks you through everything you need to get started, step by step. Choose your role below and we'll show you the path built for you.</p>
             <p class="meta">Most people finish their setup in about 15 to 20 minutes. Your progress is saved as you go.</p>
-
             <div class="role-cards">
                 <button class="role-card chair" onclick="setRole('chair')">
-                    <span class="rc-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </span>
+                    <span class="rc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
                     <h3>SIG Chair or Co-Chair</h3>
                     <p>You lead a Shared Interest Group. Set up governance documents, invite members, schedule meetings, and access your committee drive.</p>
                     <span class="rc-go">Start the Chair path &#8594;</span>
                 </button>
-
                 <button class="role-card board" onclick="setRole('board')">
-                    <span class="rc-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
-                    </span>
+                    <span class="rc-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></span>
                     <h3>Board Member</h3>
                     <p>You've joined the PAWSIC Board. Review your role, sign governance forms, submit your bio and headshot, and find your meeting calendar and contacts.</p>
                     <span class="rc-go">Start the Board path &#8594;</span>
@@ -415,7 +274,7 @@
         </div>
     </section>
 
-    <!-- ================= CHAIR TRACK ================= -->
+    <!-- ============ CHAIR TRACK ============ -->
     <div class="track" id="track-chair">
         <div class="track-banner">
             <div class="container">
@@ -424,13 +283,7 @@
                 <a class="switch" onclick="setRole('board')">&#8596; I'm actually a Board Member</a>
             </div>
         </div>
-
-        <div class="progress-wrap">
-            <div class="container progress-inner">
-                <div class="progress-track"><div class="progress-fill" id="progress-chair"></div></div>
-                <div class="progress-label" id="progress-label-chair">0 of 4 complete</div>
-            </div>
-        </div>
+        <div class="progress-wrap"><div class="container progress-inner"><div class="progress-track"><div class="progress-fill" id="progress-chair"></div></div><div class="progress-label" id="progress-label-chair">0 of 4 complete</div></div></div>
 
         <div class="container">
             <nav class="step-nav" id="stepnav-chair">
@@ -441,223 +294,155 @@
                 <a href="#chair-faq"><span class="sn-num">?</span> FAQ</a>
             </nav>
 
-            <!-- Step 1: Governance Documents -->
+            <div class="journey">
+            <!-- Step 1 -->
             <section class="step-section" id="chair-docs" data-step="chair-1">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg>
-                    </div>
-                    <div class="st-titles">
-                        <div class="step-eyebrow">Step 1</div>
-                        <h3>Prepare Your Governance Documents</h3>
+                <div class="step-node">1</div>
+                <div class="step-eyebrow">Step 1</div>
+                <h3>Prepare Your Governance Documents</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Download the COI and NDA templates, adjust them for your group, and send them to admin to turn into signable forms.</span></div>
+
+                <div class="facts">
+                    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg><div><div class="fx-num">2</div><div class="fx-lab">forms every<br>member signs</div></div></div>
+                    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg><div><div class="fx-num">4</div><div class="fx-lab">steps to collect<br>signatures</div></div></div>
+                </div>
+
+                <div class="subhead">Download and customize these templates</div>
+                <div class="action-row">
+                    <a class="action ghost" href="governance/PAWSIC-Committee-Conflict-of-Interest.docx" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="a-txt"><b>COI Template</b><span>Conflict of Interest &middot; Word</span></span><span class="a-go">&#8594;</span></a>
+                    <a class="action ghost" href="governance/PAWSIC-Committee-NDA.docx" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="a-txt"><b>NDA Template</b><span>Non-Disclosure &middot; Word</span></span><span class="a-go">&#8594;</span></a>
+                    <a class="action ghost" href="governance/PAWSIC-Committee-Bylaws.docx" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="a-txt"><b>Bylaws Example</b><span>Committee bylaws &middot; Word</span></span><span class="a-go">&#8594;</span></a>
+                    <a class="action ghost" href="governance/PAWSIC-Committee-Operating-Policy.docx" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="a-txt"><b>Policy Example</b><span>Operating policy &middot; Word</span></span><span class="a-go">&#8594;</span></a>
+                </div>
+
+                <div class="flowwrap">
+                    <div class="flowtitle">How the signing workflow works</div>
+                    <div class="flowmap">
+                        <div class="fm-step"><span class="fm-k">01</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span><div class="fm-t">Copy &amp; customize</div><div class="fm-d">Edit each template for your committee.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">02</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span><div class="fm-t">Send to admin</div><div class="fm-d">Email your final COI &amp; NDA plus who signs.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">03</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div class="fm-t">Admin builds the form</div><div class="fm-d">PAWSIC adds signature fields.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">04</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></span><div class="fm-t">Distribute to members</div><div class="fm-d">Share the link and collect signatures.</div></div>
                     </div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Copy the COI and NDA templates, adjust them for your group, and send them to admin to turn into signable forms.</span></div>
-                    <p>Every committee member signs a Conflict of Interest (COI) form and a Non-Disclosure Agreement (NDA) before the first meeting. Each template is a view-only Google Doc you copy and adjust for your committee, no approval needed.</p>
 
-                    <div class="cards-grid">
-                        <div class="card">
-                            <h5>COI Template</h5>
-                            <p>Conflict of Interest template. Copy it and tailor the language to your committee.</p>
-                            <a class="btn" href="governance/PAWSIC-Committee-Conflict-of-Interest.docx" target="_blank" rel="noopener">Download COI Template</a>
-                        </div>
-                        <div class="card">
-                            <h5>NDA Template</h5>
-                            <p>Non-Disclosure Agreement template to protect your committee's confidential work.</p>
-                            <a class="btn" href="governance/PAWSIC-Committee-NDA.docx" target="_blank" rel="noopener">Download NDA Template</a>
-                        </div>
-                    </div>
-
-                    <h4>How the signing workflow works</h4>
-                    <div class="flow">
-                        <div class="flow-step"><div class="flow-num">1</div><div><h5>Copy and customize</h5><p>Open each template, choose File then Make a copy, and edit it for your committee.</p></div></div>
-                        <div class="flow-step"><div class="flow-num">2</div><div><h5>Send to admin</h5><p>Email your finalized COI and NDA to the PAWSIC administrator, along with the list of members who need to sign.</p></div></div>
-                        <div class="flow-step"><div class="flow-num">3</div><div><h5>Admin builds the JotForm</h5><p>PAWSIC turns your text into a JotForm with signature fields, ready for digital signing.</p></div></div>
-                        <div class="flow-step"><div class="flow-num">4</div><div><h5>Distribute to members</h5><p>We send the signing link back to you. Share it with your members and collect signatures before the first meeting.</p></div></div>
-                    </div>
-
-                    <h4>Bylaws and committee policy</h4>
-                    <p>After your first meeting, upload finalized bylaws and policy documents to your committee's Google Drive folder. Use these examples as a starting point.</p>
-                    <div class="cards-grid">
-                        <div class="card">
-                            <h5>Bylaws Example</h5>
-                            <p>Sample bylaws showing structure and content. Copy and customize for your committee.</p>
-                            <a class="btn" href="governance/PAWSIC-Committee-Bylaws.docx" target="_blank" rel="noopener">Download Bylaws Example</a>
-                        </div>
-                        <div class="card">
-                            <h5>Policy Example</h5>
-                            <p>Sample committee policy to guide your operating procedures and guidelines.</p>
-                            <a class="btn" href="governance/PAWSIC-Committee-Operating-Policy.docx" target="_blank" rel="noopener">Download Policy Example</a>
-                        </div>
-                    </div>
-
-                    <div class="mark-done" onclick="toggleDone(this,'chair-1')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="callout warm"><strong>Tip:</strong> Upload your finalized bylaws and policy to your committee's Google Drive folder after your first meeting.</div>
+                <div class="mark-done" onclick="toggleDone(this,'chair-1')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 2: Invite Members -->
+            <!-- Step 2 -->
             <section class="step-section" id="chair-invite" data-step="chair-2">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
-                    </div>
-                    <div class="st-titles">
-                        <div class="step-eyebrow">Step 2</div>
-                        <h3>Invite and Onboard Your Members</h3>
+                <div class="step-node">2</div>
+                <div class="step-eyebrow">Step 2</div>
+                <h3>Invite and Onboard Your Members</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Send your members the invite email below, and ask them to sign the two forms before your first meeting.</span></div>
+
+                <div class="flowwrap">
+                    <div class="flowtitle">The invite, at a glance</div>
+                    <div class="flowmap">
+                        <div class="fm-step"><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></span><div class="fm-t">Send the invite</div><div class="fm-d">Use the email below.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><div class="fm-t">They sign COI &amp; NDA</div><div class="fm-d">Before the first meeting.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><div class="fm-t">First meeting</div><div class="fm-d">They get the calendar invite.</div></div>
                     </div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Send your members the invite email below, and ask them to sign the two forms before your first meeting.</span></div>
-                    <p>You invite the members who have reached out to you directly. Use this sample email to bring in co-chairs and initial members and point them to the signing forms.</p>
 
-                    <div class="email-sample">
-                        <button class="copy-btn" onclick="copyEmail(this)">Copy email</button>
-                        <div id="chair-email-body">
-                            <p><strong>Subject: You're invited to join the PAWSIC [Committee Name] Shared Interest Group</strong></p>
-                            <p>Dear [Member Name],</p>
-                            <p>We're excited to invite you to join the PAWSIC [Committee Name] Shared Interest Group (SIG). This committee brings together [brief description of focus] to advance [committee mission].</p>
-                            <p><strong>Before our first meeting on [Date], please complete the following:</strong></p>
-                            <ol>
-                                <li>Review and sign the Conflict of Interest (COI) form: [COI Form Link]</li>
-                                <li>Review and sign the Non-Disclosure Agreement (NDA): [NDA Form Link]</li>
-                            </ol>
-                            <p>Please complete both by [Deadline Date] so we can move forward. These documents help us maintain transparency and protect our committee's confidential discussions.</p>
-                            <p>Our first meeting is on [Date] at [Time] via Zoom. You'll receive a calendar invite with the link once members have signed.</p>
-                            <p>Warm regards,<br>[Your Name]<br>PAWSIC [Committee Name] Chair</p>
-                        </div>
+                <div class="subhead">Your ready-to-send invite email</div>
+                <div class="email-sample">
+                    <button class="copy-btn" onclick="copyEmail(this)">Copy email</button>
+                    <div id="chair-email-body">
+                        <p><strong>Subject: You're invited to join the PAWSIC [Committee Name] Shared Interest Group</strong></p>
+                        <p>Dear [Member Name],</p>
+                        <p>We're excited to invite you to join the PAWSIC [Committee Name] Shared Interest Group (SIG). This committee brings together [brief description of focus] to advance [committee mission].</p>
+                        <p><strong>Before our first meeting on [Date], please complete the following:</strong></p>
+                        <ol>
+                            <li>Review and sign the Conflict of Interest (COI) form: [COI Form Link]</li>
+                            <li>Review and sign the Non-Disclosure Agreement (NDA): [NDA Form Link]</li>
+                        </ol>
+                        <p>Please complete both by [Deadline Date]. These documents help us maintain transparency and protect our committee's confidential discussions.</p>
+                        <p>Our first meeting is on [Date] at [Time] via Zoom. You'll receive a calendar invite with the link once members have signed.</p>
+                        <p>Warm regards,<br>[Your Name]<br>PAWSIC [Committee Name] Chair</p>
                     </div>
-                    <div class="callout warm"><strong>Tip:</strong> Personalize the committee name, dates, and links before sending. Admin can help you build onboarding forms that also collect member resumes and availability.</div>
-
-                    <div class="mark-done" onclick="toggleDone(this,'chair-2')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
                 </div>
+                <div class="callout warm"><strong>Tip:</strong> Personalize the committee name, dates, and links before sending. Admin can help you build onboarding forms that also collect member resumes and availability.</div>
+                <div class="mark-done" onclick="toggleDone(this,'chair-2')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 3: Schedule Meetings -->
+            <!-- Step 3 -->
             <section class="step-section" id="chair-schedule" data-step="chair-3">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                    </div>
-                    <div class="st-titles">
-                        <div class="step-eyebrow">Step 3</div>
-                        <h3>Schedule Committee Meetings</h3>
+                <div class="step-node">3</div>
+                <div class="step-eyebrow">Step 3</div>
+                <h3>Schedule Committee Meetings</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Pick a time in the scheduler and paste in your members' emails. Everyone gets the invite automatically.</span></div>
+
+                <div class="facts">
+                    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg><div><div class="fx-num">100</div><div class="fx-lab">attendees you<br>can add at once</div></div></div>
+                    <div class="fact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><div class="fx-num">~60</div><div class="fx-lab">minutes per<br>committee call</div></div></div>
+                </div>
+
+                <div class="flowwrap">
+                    <div class="flowtitle">Book in three moves</div>
+                    <div class="flowmap">
+                        <div class="fm-step"><span class="fm-k">01</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><div class="fm-t">Pick a date &amp; time</div><div class="fm-d">That works for your committee.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">02</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span><div class="fm-t">Add member emails</div><div class="fm-d">Comma-separated in the attendees field.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">03</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></span><div class="fm-t">Finish booking</div><div class="fm-d">The link emails to everyone.</div></div>
                     </div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Pick a time in the scheduler and paste in your members' emails. Everyone gets the invite automatically.</span></div>
-                    <p>The scheduler is for Chairs and Co-Chairs. Book a time and add your members so everyone gets the invite automatically.</p>
 
-                    <h4>Watch: how to schedule a committee meeting</h4>
-                    <div class="video-frame" style="padding-bottom:56.0417%;padding-top:0;">
-                        <iframe src="https://www.tella.tv/video/vid_cmrf85lj2003a0bjef3iv510c/embed?b=0&amp;title=0&amp;a=1&amp;loop=0&amp;t=0&amp;muted=0&amp;wt=0&amp;o=1" allow="autoplay; fullscreen" allowtransparency title="How to schedule a committee meeting"></iframe>
-                    </div>
+                <div class="subhead">Watch: how to schedule a committee meeting</div>
+                <div class="video-frame" style="padding-bottom:56.0417%;padding-top:0;"><iframe src="https://www.tella.tv/video/vid_cmrf85lj2003a0bjef3iv510c/embed?b=0&amp;title=0&amp;a=1&amp;loop=0&amp;t=0&amp;muted=0&amp;wt=0&amp;o=1" allow="autoplay; fullscreen" allowtransparency title="How to schedule a committee meeting"></iframe></div>
+                <p>The highlighted field below is where you paste your members' emails, separated by commas: <code>jane@example.com, john@example.com</code></p>
+                <img src="scheduler-attendees.png" alt="PAWSIC Zoom scheduler form with the Additional Attendee Emails field highlighted" style="width:100%;max-width:600px;display:block;margin:1rem 0;border:1px solid var(--border);border-radius:12px;">
 
-                    <div class="callout blue">
-                        <h4>How to book</h4>
-                        <ol>
-                            <li><strong>Pick a date and time</strong> that works for your committee.</li>
-                            <li><strong>Add member emails</strong> in the "Additional Attendee Emails" field, separated by commas. You can add up to 100 attendees: <code>jane@example.com, john@example.com</code></li>
-                            <li><strong>Finish booking.</strong> The meeting link goes to you and every attendee by email.</li>
-                        </ol>
-                    </div>
-
-                    <p>The highlighted field below is where you paste your members' emails:</p>
-                    <img src="scheduler-attendees.png" alt="PAWSIC Zoom scheduler form with the Additional Attendee Emails field highlighted, showing that you can use commas to add up to 100 attendees" style="width:100%;max-width:620px;display:block;margin:1rem auto;border:1px solid var(--border);border-radius:10px;">
-
-                    <h4>Book your meeting</h4>
-                    <iframe class="scheduler-iframe" src="https://scheduler.zoom.us/pawsic/1-hour-pawsic-committees?embed=true" title="PAWSIC committee scheduler"></iframe>
-
-                    <div class="mark-done" onclick="toggleDone(this,'chair-3')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="subhead">Book your meeting</div>
+                <iframe class="scheduler-iframe" src="https://scheduler.zoom.us/pawsic/1-hour-pawsic-committees?embed=true" title="PAWSIC committee scheduler"></iframe>
+                <div class="mark-done" onclick="toggleDone(this,'chair-3')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 4: Access Your Drive -->
+            <!-- Step 4 -->
             <section class="step-section" id="chair-drive" data-step="chair-4">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
-                    </div>
-                    <div class="st-titles">
-                        <div class="step-eyebrow">Step 4</div>
-                        <h3>Access Your Committee Drive</h3>
+                <div class="step-node">4</div>
+                <div class="step-eyebrow">Step 4</div>
+                <h3>Access Your Committee Drive</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Open root.pawsic.org and sign in with your assigned email to reach your committee's shared Drive.</span></div>
+
+                <a class="action" href="https://root.pawsic.org" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span><span class="a-txt"><b>Open your ROOT portal</b><span>root.pawsic.org &middot; sign in with your assigned email</span></span><span class="a-go">&#8594;</span></a>
+
+                <div class="flowwrap">
+                    <div class="flowtitle">Sign in, in four steps</div>
+                    <div class="flowmap">
+                        <div class="fm-step"><span class="fm-k">01</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><div class="fm-t">Open the link</div><div class="fm-d">root.pawsic.org</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">02</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></span><div class="fm-t">Use your assigned email</div><div class="fm-d">The exact address admin gave you.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">03</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></span><div class="fm-t">Confirm your email</div><div class="fm-d">When prompted.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">04</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span><div class="fm-t">Your drive loads</div><div class="fm-d">Committee files appear automatically.</div></div>
                     </div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Open root.pawsic.org and sign in with your assigned email to reach your committee's shared Drive.</span></div>
-                    <p>Your shared Google Drive is the hub for agendas, minutes, recordings, governance documents, and member contacts. You reach it through the ROOT portal.</p>
 
-                    <a class="root-link" href="https://root.pawsic.org" target="_blank" rel="noopener">
-                        <span class="rl-text"><b>Go to your ROOT portal</b><span>Click to open the portal and sign in with your assigned email</span></span>
-                        <span class="rl-url">root.pawsic.org &#8594;</span>
-                    </a>
+                <div class="subhead">Watch: ROOT activation walkthrough</div>
+                <div class="video-frame"><iframe src="https://player.vimeo.com/video/1213729014?h=59a441e38d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="ROOT Activation"></iframe></div>
 
-                    <div class="callout blue">
-                        <h4>Quick login steps</h4>
-                        <ol>
-                            <li>Click <strong>root.pawsic.org</strong> above.</li>
-                            <li>Sign in with the <strong>exact email address</strong> the PAWSIC administrator assigned to you.</li>
-                            <li>Confirm your email when prompted.</li>
-                            <li>Your committee drive and linked resources load automatically.</li>
-                        </ol>
-                    </div>
-
-                    <h4>Watch: ROOT activation walkthrough</h4>
-                    <div class="video-frame">
-                        <iframe src="https://player.vimeo.com/video/1213729014?h=59a441e38d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="ROOT Activation"></iframe>
-                    </div>
-
-                    <p>Expand below for details on the verification screen, privacy, and managing access.</p>
-
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>Why do I see a warning screen at first?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>On your first visit to root.pawsic.org you may see "Google hasn't verified this app." Because the portal is built as a hybrid tool that external partners can also use (for example @gmail.com or @aol.com), Google shows a maximum caution alert until we finish official registration.</p>
-                            <p><strong>To continue safely:</strong> click "Advanced," then "Go to ROOT [EXT] (unsafe)." The wording is Google's standard label for apps still in review.</p>
-                        </div></div>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>What can this app access?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>The app requests only your email address, purely to know who is logging in and load your dashboard.</p>
-                            <p>It cannot read your emails, access your Google Drive files, or manage your Google account. It simply connects to our database to fetch your portal data.</p>
-                        </div></div>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>Is the app being verified by Google?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>Yes. We're moving the app through Google's official OAuth verification. Until that finishes, you can safely bypass the warning as described above. Once approved, the warning disappears and external users see only a standard prompt confirming their email.</p>
-                        </div></div>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>How do I revoke access?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>You can remove access anytime:</p>
-                            <ol><li>Go to your <a href="https://myaccount.google.com/" target="_blank" rel="noopener">Google Account settings</a>.</li><li>Click <strong>Data & Privacy</strong>.</li><li>Under <strong>Data from apps and services you use</strong>, select <strong>Third-party apps & services</strong>.</li><li>Select our app and choose <strong>Remove Access</strong>.</li></ol>
-                        </div></div>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>What files will I see?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>You'll see only the Drive resources you have access to as a viewer or editor, plus anything shared as viewable to anyone with the link. If you don't have access to anything yet, you'll be sent to a short form to request it.</p>
-                        </div></div>
-                    </div>
-
-                    <div class="callout warm"><strong>Trouble signing in?</strong> Use the exact assigned email, clear your browser cookies if you were logged in before, and contact PAWSIC support if it persists.</div>
-
-                    <div class="mark-done" onclick="toggleDone(this,'chair-4')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="subhead">Good to know about the sign-in</div>
+                <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>Why do I see a warning screen at first?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>On your first visit to root.pawsic.org you may see "Google hasn't verified this app." Because the portal is a hybrid tool external partners can also use, Google shows a caution alert until we finish official registration.</p><p><strong>To continue safely:</strong> click "Advanced," then "Go to ROOT [EXT] (unsafe)." That wording is Google's standard label for apps still in review.</p></div></div></div>
+                <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>What can this app access?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>The app requests only your email address, purely to know who is logging in and load your dashboard. It cannot read your emails, access your Google Drive files, or manage your Google account.</p></div></div></div>
+                <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>How do I revoke access?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>Anytime, from your <a href="https://myaccount.google.com/" target="_blank" rel="noopener">Google Account</a>: Data &amp; Privacy &rarr; Third-party apps &amp; services &rarr; select the app &rarr; Remove Access.</p></div></div></div>
+                <div class="callout warm"><strong>Trouble signing in?</strong> Use the exact assigned email, clear your browser cookies if you were logged in before, and contact PAWSIC support if it persists.</div>
+                <div class="mark-done" onclick="toggleDone(this,'chair-4')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
             <!-- FAQ -->
-            <section class="step-section" id="chair-faq" style="border-bottom:none;">
-                <div class="step-head">
-                    <div class="step-icon" style="background:var(--navy);">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-                    </div>
-                    <div class="st-titles"><div class="step-eyebrow">Good to know</div><h3>Frequently Asked Questions</h3></div>
-                </div>
-                <div class="step-body">
+            <section class="step-section" id="chair-faq" style="padding-bottom:1rem;">
+                <div class="step-node" style="background:linear-gradient(150deg,var(--navy),var(--indigo));color:#fff;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></div>
+                <div class="step-eyebrow">Good to know</div>
+                <h3>Frequently Asked Questions</h3>
+                <div style="margin-top:1rem;">
                     <div class="faq-item"><h4>Can I add members after the first meeting?</h4><p>Yes. Invite additional members anytime. They complete the COI and NDA, then join from the next meeting onward.</p></div>
                     <div class="faq-item"><h4>Who has access to the committee Google Drive?</h4><p>Typically the Chair and Co-Chair have full access. Individual members may be added to specific folders as your committee needs.</p></div>
                     <div class="faq-item"><h4>When do we upload bylaws and policy?</h4><p>After your first meeting, once the group has reviewed and finalized them, upload to your Drive folder.</p></div>
@@ -665,10 +450,11 @@
                     <div class="faq-item"><h4>Who do I contact with questions?</h4><p>Reach the PAWSIC program administrator at <a href="mailto:dahlia@pawsic.org">dahlia@pawsic.org</a>.</p></div>
                 </div>
             </section>
+            </div>
         </div>
     </div>
 
-    <!-- ================= BOARD TRACK ================= -->
+    <!-- ============ BOARD TRACK ============ -->
     <div class="track" id="track-board">
         <div class="track-banner">
             <div class="container">
@@ -677,199 +463,141 @@
                 <a class="switch" onclick="setRole('chair')">&#8596; I'm actually a SIG Chair</a>
             </div>
         </div>
-
-        <div class="progress-wrap">
-            <div class="container progress-inner">
-                <div class="progress-track"><div class="progress-fill" id="progress-board"></div></div>
-                <div class="progress-label" id="progress-label-board">0 of 5 complete</div>
-            </div>
-        </div>
+        <div class="progress-wrap"><div class="container progress-inner"><div class="progress-track"><div class="progress-fill" id="progress-board"></div></div><div class="progress-label" id="progress-label-board">0 of 5 complete</div></div></div>
 
         <div class="container">
             <nav class="step-nav" id="stepnav-board">
-                <a href="#board-welcome"><span class="sn-num">1</span> Welcome & Mission</a>
+                <a href="#board-welcome"><span class="sn-num">1</span> Welcome &amp; Mission</a>
                 <a href="#board-role"><span class="sn-num">2</span> Your Role</a>
-                <a href="#board-docs"><span class="sn-num">3</span> Documents & Forms</a>
-                <a href="#board-bio"><span class="sn-num">4</span> Bio & Headshot</a>
-                <a href="#board-calendar"><span class="sn-num">5</span> Calendar & Contacts</a>
+                <a href="#board-docs"><span class="sn-num">3</span> Documents &amp; Forms</a>
+                <a href="#board-bio"><span class="sn-num">4</span> Bio &amp; Headshot</a>
+                <a href="#board-calendar"><span class="sn-num">5</span> Calendar &amp; Contacts</a>
                 <a href="#board-drive"><span class="sn-num">+</span> Portal Access</a>
             </nav>
 
-            <!-- Step 1: Welcome & Mission -->
+            <div class="journey">
+            <!-- Step 1 -->
             <section class="step-section" id="board-welcome" data-step="board-1">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01"/></svg>
-                    </div>
-                    <div class="st-titles"><div class="step-eyebrow">Step 1</div><h3>Welcome and Our Mission</h3></div>
+                <div class="step-node">1</div>
+                <div class="step-eyebrow">Step 1</div>
+                <h3>Welcome and Our Mission</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Get to know PAWSIC's mission and read the welcome message.</span></div>
+                <p>Welcome to the PAWSIC Board. Thank you for lending your expertise to advancing wound care in post-acute settings.</p>
+
+                <div class="subhead">PAWSIC at a glance</div>
+                <div class="icongrid">
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></div><h5>501(c)(6) nonprofit council</h5><p>The Post-Acute Wound &amp; Skin Integrity Council.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg></div><h5>Wound &amp; skin integrity</h5><p>Focused on care in post-acute settings.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div><h5>Education &amp; advocacy</h5><p>Accredited CE, an annual conference, and advocacy.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg></div><h5>Your leadership</h5><p>You help guide clinical governance and strategy.</p></div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Get to know PAWSIC's mission and read the welcome message.</span></div>
-                    <p>Welcome to the PAWSIC Board. Thank you for lending your expertise to advancing wound care in post-acute settings. This section orients you to who we are and the purpose you're joining.</p>
-                    <div class="callout gold">
-                        <h4>About PAWSIC</h4>
-                        <p>PAWSIC, the Post-Acute Wound &amp; Skin Integrity Council, is a 501(c)(6) nonprofit professional council dedicated to advancing wound care in post-acute settings. We bring wound care clinicians, educators, and post-acute care organizations together through accredited continuing education, an annual conference, professional networking, and advocacy for elevated standards of wound and skin integrity care.</p>
-                        <p>As a Board member, you help guide the clinical governance and strategic direction of that mission.</p>
-                    </div>
-                    <h4>Welcome message</h4>
-                    <p>[Placeholder: optional welcome video or letter from the Board Chair or Executive Director.]</p>
-                    <div class="mark-done" onclick="toggleDone(this,'board-1')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="callout gold"><h4>Welcome message</h4><p>[Placeholder: optional welcome video or letter from the Board Chair or Executive Director.]</p></div>
+                <div class="mark-done" onclick="toggleDone(this,'board-1')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 2: Role & Responsibilities -->
+            <!-- Step 2 -->
             <section class="step-section" id="board-role" data-step="board-2">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3-4.8-2.5-4.8 2.5.9-5.3L4.3 7.6l5.3-.8z"/></svg>
-                    </div>
-                    <div class="st-titles"><div class="step-eyebrow">Step 2</div><h3>Your Role and Responsibilities</h3></div>
+                <div class="step-node">2</div>
+                <div class="step-eyebrow">Step 2</div>
+                <h3>Your Role and Responsibilities</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Learn what Board members do, how much time it takes, and how long your term runs.</span></div>
+
+                <div class="subhead">What Board members do</div>
+                <div class="icongrid">
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h5>Governance &amp; oversight</h5><p>Guide PAWSIC's mission, strategy, and financial health.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 7l9-4 9 4M5 7v6a7 7 0 0 0 14 0V7"/></svg></div><h5>Fiduciary duty</h5><p>Act in PAWSIC's best interest with care, loyalty, and good faith.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h5>Meeting participation</h5><p>Prepare for and attend meetings, and vote on Board matters.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h5>Committee service</h5><p>Serve on or support at least one committee or SIG.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h5>Confidentiality &amp; COI</h5><p>Sign and uphold the NDA and COI; recuse on any conflict.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div><h5>Ambassadorship</h5><p>Represent PAWSIC professionally and support its programs.</p></div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Learn what Board members do, how much time it takes, and how long your term runs.</span></div>
-                    <p>A clear picture of what Board service involves so you can contribute with confidence from day one.</p>
-                    <div class="callout gold">
-                        <h4>What Board members do</h4>
-                        <ul>
-                            <li><strong>Governance and oversight:</strong> help guide PAWSIC's mission, strategy, and financial health.</li>
-                            <li><strong>Fiduciary duty:</strong> act in PAWSIC's best interest with care, loyalty, and good faith.</li>
-                            <li><strong>Meeting participation:</strong> prepare for and attend Board meetings, and vote on matters before the Board.</li>
-                            <li><strong>Committee service:</strong> serve on or support at least one committee or Shared Interest Group.</li>
-                            <li><strong>Confidentiality and conflict of interest:</strong> sign and uphold the NDA and COI (Step 3), and recuse yourself from any matter where you have a conflict.</li>
-                            <li><strong>Ambassadorship:</strong> represent PAWSIC professionally and support its programs and advocacy.</li>
-                        </ul>
-                    </div>
-                    <div class="callout blue"><strong>Term and time commitment:</strong> [PAWSIC leadership to confirm your term length and the expected time commitment, for example meeting frequency and committee hours.]</div>
-                    <div class="mark-done" onclick="toggleDone(this,'board-2')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="callout blue"><strong>Term and time commitment:</strong> [PAWSIC leadership to confirm your term length and expected time commitment, for example meeting frequency and committee hours.]</div>
+                <div class="mark-done" onclick="toggleDone(this,'board-2')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 3: Documents & Forms -->
+            <!-- Step 3 -->
             <section class="step-section" id="board-docs" data-step="board-3">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-                    </div>
-                    <div class="st-titles"><div class="step-eyebrow">Step 3</div><h3>Governance Documents and Required Forms</h3></div>
+                <div class="step-node">3</div>
+                <div class="step-eyebrow">Step 3</div>
+                <h3>Governance Documents and Required Forms</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Read the bylaws and policies, grab the deck template, then sign your COI and NDA before your first meeting.</span></div>
+
+                <div class="subhead">Review these documents</div>
+                <div class="action-row">
+                    <div class="action pending"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="a-txt"><b>Board Bylaws</b><span>Link coming soon</span></span></div>
+                    <div class="action pending"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="a-txt"><b>Board Policies</b><span>Link coming soon</span></span></div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Read the bylaws and policies, grab the deck template, then sign your COI and NDA before your first meeting.</span></div>
-                    <p>Every Board member signs a Conflict of Interest (COI) form and a Non-Disclosure Agreement (NDA). Review the governance documents, then sign both forms.</p>
 
-                    <h4>Review these documents</h4>
-                    <div class="cards-grid">
-                        <div class="card"><h5>Board Bylaws</h5><p>The rules that govern how the Board operates.</p><span class="btn btn-pending gold">View Bylaws <small>Link coming soon</small></span></div>
-                        <div class="card"><h5>Board Policies</h5><p>Key policies every Board member should know.</p><span class="btn btn-pending gold">View Policies <small>Link coming soon</small></span></div>
-                    </div>
+                <div class="subhead">Present with the PAWSIC deck template</div>
+                <a class="action gold" href="https://docs.google.com/presentation/d/1Hr3AwpE_vpAq05D1zljXjQS29j3tk2Et/copy" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></span><span class="a-txt"><b>PAWSIC Deck Template</b><span>Opens a fresh copy in your Google Drive</span></span><span class="a-go">&#8594;</span></a>
 
-                    <h4>PAWSIC presentation template</h4>
-                    <div class="cards-grid">
-                        <div class="card"><h5>PAWSIC Deck Template</h5><p>The official branded slide template for Board meetings, committee presentations, and webinars. Opens a fresh copy in your Google Drive, always start from a copy, don't edit the original.</p><a class="btn gold" href="https://docs.google.com/presentation/d/1Hr3AwpE_vpAq05D1zljXjQS29j3tk2Et/copy" target="_blank" rel="noopener">Make a Copy of the Template</a></div>
-                    </div>
-
-                    <h4>Sign your required form</h4>
-                    <div class="cards-grid">
-                        <div class="card"><h5>NDA &amp; Conflict of Interest</h5><p>One form that covers both the Non-Disclosure Agreement and your Conflict of Interest disclosure. Required before your first Board meeting.</p><a class="btn gold" href="https://form.jotform.com/executiveteam_executiveteam874/nda-and-coi" target="_blank" rel="noopener">Sign the NDA &amp; COI Form</a></div>
-                    </div>
-
-                    <div class="mark-done" onclick="toggleDone(this,'board-3')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="subhead">Sign your required form</div>
+                <a class="action gold" href="https://form.jotform.com/executiveteam_executiveteam874/nda-and-coi" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="a-txt"><b>Sign the NDA &amp; COI Form</b><span>One form covers both &middot; required before your first meeting</span></span><span class="a-go">&#8594;</span></a>
+                <div class="mark-done" onclick="toggleDone(this,'board-3')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 4: Bio & Headshot -->
+            <!-- Step 4 -->
             <section class="step-section" id="board-bio" data-step="board-4">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                    </div>
-                    <div class="st-titles"><div class="step-eyebrow">Step 4</div><h3>Submit Your Bio and Headshot</h3></div>
+                <div class="step-node">4</div>
+                <div class="step-eyebrow">Step 4</div>
+                <h3>Submit Your Bio and Headshot</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Send us a short bio and a clear, high-resolution headshot so we can feature you.</span></div>
+
+                <div class="subhead">What to include</div>
+                <div class="icongrid">
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h5>Name &amp; credentials</h5><p>Exactly as you'd like them shown.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h5>Short bio</h5><p>About 75 to 120 words on your role and expertise.</p></div>
+                    <div class="ig-item"><div class="ig-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><h5>Hi-res headshot</h5><p>Professional, well-lit, at least 1000px wide.</p></div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Send us a short bio and a clear, high-resolution headshot so we can feature you.</span></div>
-                    <p>We feature Board members on the PAWSIC website and social media. Please send a short professional bio and a high-quality headshot.</p>
-                    <div class="callout gold">
-                        <h4>What to include</h4>
-                        <ul>
-                            <li><strong>Full name and credentials</strong> as you'd like them shown.</li>
-                            <li><strong>Short bio</strong> of about 75 to 120 words: your role, expertise, and connection to wound care.</li>
-                            <li><strong>High-resolution headshot</strong>, professional, well-lit, at least 1000 pixels wide.</li>
-                        </ul>
-                    </div>
-                    <a class="btn gold" href="https://form.jotform.com/executiveteam_executiveteam874/pawsic-guest-board-member-form" target="_blank" rel="noopener">Submit Bio &amp; Headshot</a>
-                    <div class="mark-done" onclick="toggleDone(this,'board-4')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <a class="action gold" href="https://form.jotform.com/executiveteam_executiveteam874/pawsic-guest-board-member-form" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span><span class="a-txt"><b>Submit Bio &amp; Headshot</b><span>Opens the PAWSIC Board member form</span></span><span class="a-go">&#8594;</span></a>
+                <div class="mark-done" onclick="toggleDone(this,'board-4')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Step 5: Calendar & Contacts -->
+            <!-- Step 5 -->
             <section class="step-section" id="board-calendar" data-step="board-5">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                    </div>
-                    <div class="st-titles"><div class="step-eyebrow">Step 5</div><h3>Meeting Calendar and Key Contacts</h3></div>
-                </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> See when the Board meets and who to contact for what.</span></div>
-                    <h4>Board meeting cadence</h4>
-                    <div class="callout gold"><p>[Placeholder: Board meeting schedule and cadence, for example quarterly meetings plus committee calls. Add dates or a calendar link.]</p></div>
-                    <h4>Key contacts</h4>
-                    <div class="callout gold"><p>[Placeholder: roster of who to contact for what, for example Board Chair, Executive Director, and program administrator.]</p></div>
-                    <div class="mark-done" onclick="toggleDone(this,'board-5')"><span class="md-box"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
-                </div>
+                <div class="step-node">5</div>
+                <div class="step-eyebrow">Step 5</div>
+                <h3>Meeting Calendar and Key Contacts</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> See when the Board meets and who to contact for what.</span></div>
+                <div class="callout gold"><h4>Board meeting cadence</h4><p>[Placeholder: Board meeting schedule and cadence, for example quarterly meetings plus committee calls. Add dates or a calendar link.]</p></div>
+                <div class="callout gold"><h4>Key contacts</h4><p>[Placeholder: roster of who to contact for what, for example Board Chair, Executive Director, and program administrator.]</p></div>
+                <div class="mark-done" onclick="toggleDone(this,'board-5')"><span class="md-box"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span> Mark this step complete</div>
             </section>
 
-            <!-- Board: Portal access (shared ROOT) -->
-            <section class="step-section" id="board-drive" style="border-bottom:none;">
-                <div class="step-head">
-                    <div class="step-icon">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+            <!-- Portal -->
+            <section class="step-section" id="board-drive" style="padding-bottom:1rem;">
+                <div class="step-node"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0C1F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+                <div class="step-eyebrow">Portal access</div>
+                <h3>Access Board Documents in ROOT</h3>
+                <div class="tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Open root.pawsic.org and sign in with your assigned email to reach all Board documents.</span></div>
+                <a class="action" href="https://root.pawsic.org" target="_blank" rel="noopener"><span class="a-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span><span class="a-txt"><b>Open your ROOT portal</b><span>root.pawsic.org &middot; sign in with your assigned email</span></span><span class="a-go">&#8594;</span></a>
+                <div class="flowwrap">
+                    <div class="flowtitle">Sign in, in four steps</div>
+                    <div class="flowmap">
+                        <div class="fm-step"><span class="fm-k">01</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><div class="fm-t">Open the link</div><div class="fm-d">root.pawsic.org</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">02</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg></span><div class="fm-t">Use your assigned email</div><div class="fm-d">The exact address admin gave you.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">03</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></span><div class="fm-t">Confirm your email</div><div class="fm-d">When prompted.</div></div>
+                        <div class="fm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg></div>
+                        <div class="fm-step"><span class="fm-k">04</span><span class="fm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></span><div class="fm-t">Documents load</div><div class="fm-d">Board files appear automatically.</div></div>
                     </div>
-                    <div class="st-titles"><div class="step-eyebrow">Portal access</div><h3>Access Board Documents in ROOT</h3></div>
                 </div>
-                <div class="step-body">
-                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Open root.pawsic.org and sign in with your assigned email to reach all Board documents.</span></div>
-                    <p>Board materials, minutes, and shared documents live in the ROOT portal. Sign in with your assigned email to reach everything you have access to.</p>
-                    <a class="root-link" href="https://root.pawsic.org" target="_blank" rel="noopener">
-                        <span class="rl-text"><b>Go to your ROOT portal</b><span>Click to open the portal and sign in with your assigned email</span></span>
-                        <span class="rl-url">root.pawsic.org &#8594;</span>
-                    </a>
-                    <div class="callout blue">
-                        <h4>Quick login steps</h4>
-                        <ol>
-                            <li>Click <strong>root.pawsic.org</strong> above.</li>
-                            <li>Sign in with the <strong>exact email address</strong> assigned to you.</li>
-                            <li>Confirm your email when prompted.</li>
-                            <li>Your Board documents and resources load automatically.</li>
-                        </ol>
-                    </div>
-                    <h4>Watch: ROOT activation walkthrough</h4>
-                    <div class="video-frame">
-                        <iframe src="https://player.vimeo.com/video/1213729014?h=59a441e38d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="ROOT Activation"></iframe>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>Why do I see a warning screen at first?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>On your first visit you may see "Google hasn't verified this app." Because the portal supports external partners as well as staff, Google shows a caution alert until official registration is complete. Click "Advanced," then "Go to ROOT [EXT] (unsafe)" to continue safely.</p>
-                        </div></div>
-                    </div>
-                    <div class="accordion">
-                        <div class="accordion-header" onclick="toggleAccordion(this)"><span>What can this app access?</span><span class="accordion-toggle">&#9662;</span></div>
-                        <div class="accordion-content"><div class="accordion-body">
-                            <p>Only your email address, to identify you and load your dashboard. It cannot read emails, open your Drive files, or manage your Google account.</p>
-                        </div></div>
-                    </div>
-                    <div class="callout warm"><strong>Trouble signing in?</strong> Use your exact assigned email, clear cookies if you were logged in before, and contact PAWSIC support if it persists.</div>
-                </div>
+                <div class="subhead">Watch: ROOT activation walkthrough</div>
+                <div class="video-frame"><iframe src="https://player.vimeo.com/video/1213729014?h=59a441e38d&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="ROOT Activation"></iframe></div>
+                <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>Why do I see a warning screen at first?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>On your first visit you may see "Google hasn't verified this app." Because the portal supports external partners as well as staff, Google shows a caution alert until official registration is complete. Click "Advanced," then "Go to ROOT [EXT] (unsafe)" to continue safely.</p></div></div></div>
+                <div class="accordion"><div class="accordion-header" onclick="toggleAccordion(this)"><span>What can this app access?</span><span class="accordion-toggle">&#9662;</span></div><div class="accordion-content"><div class="accordion-body"><p>Only your email address, to identify you and load your dashboard. It cannot read emails, open your Drive files, or manage your Google account.</p></div></div></div>
+                <div class="callout warm"><strong>Trouble signing in?</strong> Use your exact assigned email, clear cookies if you were logged in before, and contact PAWSIC support if it persists.</div>
             </section>
+            </div>
         </div>
     </div>
 
-    <!-- Shared help + footer -->
     <div class="container">
         <div class="help-strip">
             <h3>Need a hand?</h3>
             <p>The PAWSIC program team is happy to help with any step, from documents to portal access.</p>
-            <a href="mailto:dahlia@pawsic.org" class="btn gold btn-arrow">Contact PAWSIC Support</a>
+            <a href="mailto:dahlia@pawsic.org" class="btn btn-arrow">Contact PAWSIC Support</a>
         </div>
     </div>
 
@@ -879,110 +607,16 @@
     </footer>
 
     <script>
-        // ===== Role handling =====
-        function setRole(role) {
-            document.body.classList.remove('role-none','role-chair','role-board');
-            document.body.classList.add('role-' + role);
-            try { localStorage.setItem('pawsic_role', role); } catch(e) {}
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            refreshProgress(role);
-        }
-        function goHome() {
-            document.body.classList.remove('role-chair','role-board');
-            document.body.classList.add('role-none');
-            try { localStorage.removeItem('pawsic_role'); } catch(e) {}
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ===== Text size =====
-        function setText(px) {
-            document.documentElement.style.setProperty('--base', px + 'px');
-            try { localStorage.setItem('pawsic_text', px); } catch(e) {}
-            document.querySelectorAll('.text-size button').forEach(function(b){ b.classList.remove('active'); });
-            var map = {16:0,18:1,20:2};
-            var btns = document.querySelectorAll('.text-size button');
-            if (btns[map[px]]) btns[map[px]].classList.add('active');
-        }
-
-        // ===== Accordion =====
-        function toggleAccordion(header) {
-            header.classList.toggle('active');
-            header.nextElementSibling.classList.toggle('active');
-        }
-
-        // ===== Copy email =====
-        function copyEmail(btn) {
-            var text = document.getElementById('chair-email-body').innerText;
-            navigator.clipboard.writeText(text).then(function(){
-                var old = btn.textContent; btn.textContent = 'Copied!';
-                setTimeout(function(){ btn.textContent = old; }, 1800);
-            });
-        }
-
-        // ===== Progress / mark done =====
-        var STEPS = { chair: ['chair-1','chair-2','chair-3','chair-4'], board: ['board-1','board-2','board-3','board-4','board-5'] };
-
-        function getDone() {
-            try { return JSON.parse(localStorage.getItem('pawsic_done') || '{}'); } catch(e) { return {}; }
-        }
-        function toggleDone(el, key) {
-            var done = getDone();
-            done[key] = !done[key];
-            try { localStorage.setItem('pawsic_done', JSON.stringify(done)); } catch(e) {}
-            el.classList.toggle('done', !!done[key]);
-            var label = el.querySelector('.md-box') ? el : el;
-            el.childNodes[el.childNodes.length-1].nodeValue = done[key] ? ' Completed' : ' Mark this step complete';
-            refreshProgress(key.split('-')[0]);
-        }
-        function refreshProgress(role) {
-            if (role !== 'chair' && role !== 'board') return;
-            var done = getDone();
-            var steps = STEPS[role];
-            var count = steps.filter(function(s){ return done[s]; }).length;
-            var pct = Math.round(count / steps.length * 100);
-            var fill = document.getElementById('progress-' + role);
-            var label = document.getElementById('progress-label-' + role);
-            if (fill) fill.style.width = pct + '%';
-            if (label) label.textContent = count + ' of ' + steps.length + ' complete';
-            // step nav check marks
-            var nav = document.getElementById('stepnav-' + role);
-            if (nav) {
-                var links = nav.querySelectorAll('a');
-                steps.forEach(function(s, i){ if (links[i]) links[i].classList.toggle('done', !!done[s]); });
-            }
-        }
-
-        // ===== Init =====
-        (function init(){
-            // restore done states on the mark-done controls
-            var done = getDone();
-            document.querySelectorAll('.mark-done').forEach(function(el){
-                var key = el.getAttribute('onclick').match(/'([^']+)'/)[1];
-                if (done[key]) {
-                    el.classList.add('done');
-                    el.childNodes[el.childNodes.length-1].nodeValue = ' Completed';
-                }
-            });
-            // restore text size
-            var t = 18; try { t = parseInt(localStorage.getItem('pawsic_text')) || 18; } catch(e) {}
-            setText(t);
-            // restore role
-            var role = null; try { role = localStorage.getItem('pawsic_role'); } catch(e) {}
-            if (role === 'chair' || role === 'board') {
-                document.body.classList.remove('role-none');
-                document.body.classList.add('role-' + role);
-                refreshProgress(role);
-            }
-            refreshProgress('chair'); refreshProgress('board');
-
-            // measure header height for sticky offsets
-            function setHeaderH(){
-                var h = document.querySelector('.site-header').offsetHeight;
-                document.documentElement.style.setProperty('--header-h', h + 'px');
-            }
-            setHeaderH();
-            window.addEventListener('resize', setHeaderH);
-        })();
+        function setRole(role){document.body.classList.remove('role-none','role-chair','role-board');document.body.classList.add('role-'+role);try{localStorage.setItem('pawsic_role',role);}catch(e){}window.scrollTo({top:0,behavior:'smooth'});refreshProgress(role);}
+        function goHome(){document.body.classList.remove('role-chair','role-board');document.body.classList.add('role-none');try{localStorage.removeItem('pawsic_role');}catch(e){}window.scrollTo({top:0,behavior:'smooth'});}
+        function setText(px){document.documentElement.style.setProperty('--base',px+'px');try{localStorage.setItem('pawsic_text',px);}catch(e){}document.querySelectorAll('.text-size button').forEach(function(b){b.classList.remove('active');});var map={16:0,18:1,20:2};var btns=document.querySelectorAll('.text-size button');if(btns[map[px]])btns[map[px]].classList.add('active');}
+        function toggleAccordion(header){header.classList.toggle('active');header.nextElementSibling.classList.toggle('active');}
+        function copyEmail(btn){var text=document.getElementById('chair-email-body').innerText;navigator.clipboard.writeText(text).then(function(){var old=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=old;},1800);});}
+        var STEPS={chair:['chair-1','chair-2','chair-3','chair-4'],board:['board-1','board-2','board-3','board-4','board-5']};
+        function getDone(){try{return JSON.parse(localStorage.getItem('pawsic_done')||'{}');}catch(e){return {};}}
+        function toggleDone(el,key){var done=getDone();done[key]=!done[key];try{localStorage.setItem('pawsic_done',JSON.stringify(done));}catch(e){}el.classList.toggle('done',!!done[key]);el.childNodes[el.childNodes.length-1].nodeValue=done[key]?' Completed':' Mark this step complete';refreshProgress(key.split('-')[0]);}
+        function refreshProgress(role){if(role!=='chair'&&role!=='board')return;var done=getDone();var steps=STEPS[role];var count=steps.filter(function(s){return done[s];}).length;var pct=Math.round(count/steps.length*100);var fill=document.getElementById('progress-'+role);var label=document.getElementById('progress-label-'+role);if(fill)fill.style.width=pct+'%';if(label)label.textContent=count+' of '+steps.length+' complete';var nav=document.getElementById('stepnav-'+role);if(nav){var links=nav.querySelectorAll('a');steps.forEach(function(s,i){if(links[i])links[i].classList.toggle('done',!!done[s]);});}}
+        (function init(){var done=getDone();document.querySelectorAll('.mark-done').forEach(function(el){var key=el.getAttribute('onclick').match(/'([^']+)'/)[1];if(done[key]){el.classList.add('done');el.childNodes[el.childNodes.length-1].nodeValue=' Completed';}});var t=18;try{t=parseInt(localStorage.getItem('pawsic_text'))||18;}catch(e){}setText(t);var role=null;try{role=localStorage.getItem('pawsic_role');}catch(e){}if(role==='chair'||role==='board'){document.body.classList.remove('role-none');document.body.classList.add('role-'+role);refreshProgress(role);}refreshProgress('chair');refreshProgress('board');function setHeaderH(){var h=document.querySelector('.site-header').offsetHeight;document.documentElement.style.setProperty('--header-h',h+'px');}setHeaderH();window.addEventListener('resize',setHeaderH);})();
     </script>
 </body>
 </html>
