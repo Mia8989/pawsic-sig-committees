@@ -250,7 +250,8 @@ code{background:var(--cream);padding:.15rem .45rem;border-radius:5px;font-size:.
     <div class="side-foot">
       <div class="ts" aria-label="Text size"><span>Text</span><button onclick="setText(16)">A</button><button onclick="setText(18)">A</button><button onclick="setText(20)">A</button></div>
       <button class="side-link" onclick="swapRole()">Switch role</button>
-      <button class="side-link" onclick="goHome()">Start over</button>
+      <button class="side-link" onclick="resetProgress()">Reset my progress</button>
+      <button class="side-link" onclick="goHome()">Back to role choice</button>
     </div>
   </aside>
 
@@ -506,6 +507,11 @@ code{background:var(--cream);padding:.15rem .45rem;border-radius:5px;font-size:.
 function setRole(r){document.body.className='role-'+r;try{localStorage.setItem('pawsic_role',r)}catch(e){}window.scrollTo(0,0);refreshProgress(r);}
 function goHome(){document.body.className='role-none';try{localStorage.removeItem('pawsic_role')}catch(e){}window.scrollTo(0,0);}
 function swapRole(){setRole(document.body.classList.contains('role-chair')?'board':'chair');}
+function resetProgress(){if(!confirm('Reset your progress on this device? This unchecks every step and checklist item. It does not affect anyone else.'))return;try{localStorage.removeItem('pawsic_done');localStorage.removeItem('pawsic_checks');}catch(e){}
+  document.querySelectorAll('.mark').forEach(function(el){el.classList.remove('done');el.childNodes[el.childNodes.length-1].nodeValue=' Mark this step complete';});
+  document.querySelectorAll('.cl').forEach(function(el){el.classList.remove('done');});
+  document.querySelectorAll('.snav a').forEach(function(a){a.classList.remove('ok');});
+  refreshProgress('chair');refreshProgress('board');}
 function setText(px){document.documentElement.style.setProperty('--base',px+'px');try{localStorage.setItem('pawsic_text',px)}catch(e){}document.querySelectorAll('.text-size button,.side-foot .ts button').forEach(function(b){b.classList.remove('active')});var m={16:0,18:1,20:2};document.querySelectorAll('.text-size,.side-foot .ts').forEach(function(g){var bs=g.querySelectorAll('button');if(bs[m[px]])bs[m[px]].classList.add('active')});}
 function ta(h){h.classList.toggle('on');h.nextElementSibling.classList.toggle('on');}
 function copyEmail(btn){var t=document.getElementById('chair-email-body').innerText;navigator.clipboard.writeText(t).then(function(){var o=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=o},1600)});}
