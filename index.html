@@ -219,6 +219,41 @@
             .step-body { padding-left: 0; }
         }
 
+        /* ===== ADHD / brain-fog readability ===== */
+        /* Shorter lines, bigger and darker copy, more breathing room. */
+        .step-section { padding: 3.25rem 0; }
+        .step-body { max-width: 900px; }
+        .step-body > p { font-size: 1.14rem; color: var(--charcoal); line-height: 1.8; margin-bottom: 1.2rem; max-width: 66ch; }
+        .step-body h4 { font-size: 1.22rem; margin-top: 2.1rem; margin-bottom: 0.7rem; }
+        .step-body ul, .step-body ol { max-width: 66ch; margin-left: 1.5rem; }
+        .step-body li { margin-bottom: 0.7rem; font-size: 1.08rem; color: var(--charcoal); line-height: 1.75; }
+
+        /* One-line plain-language summary at the top of each step */
+        .step-tldr {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            background: #F1F6FB; border: 1px solid var(--border); border-left: 6px solid var(--blue);
+            border-radius: 12px; padding: 1.05rem 1.25rem; margin-bottom: 1.7rem;
+            font-size: 1.12rem; line-height: 1.65; color: var(--charcoal); max-width: 720px;
+        }
+        #track-board .step-tldr { background: #FBF7EC; border-left-color: var(--gold); }
+        .step-tldr b { color: var(--navy); }
+        .step-tldr .tldr-dot {
+            flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%;
+            background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.9rem; margin-top: 0.15rem;
+        }
+        #track-board .step-tldr .tldr-dot { background: var(--gold); color: var(--navy); }
+
+        /* Darken and enlarge the supporting copy inside boxes */
+        .callout p, .callout li { font-size: 1.06rem; color: var(--charcoal); line-height: 1.75; }
+        .card p { font-size: 1.02rem; color: var(--charcoal); line-height: 1.65; }
+        .flow-step p { font-size: 1.02rem; color: var(--charcoal); line-height: 1.7; }
+        .flow-step h5 { font-size: 1.12rem; }
+        .faq-item p { font-size: 1.06rem; color: var(--charcoal); line-height: 1.75; }
+        .faq-item h4 { font-size: 1.12rem; }
+        .accordion-body p { font-size: 1.04rem; color: var(--charcoal); line-height: 1.75; }
+        .email-sample p { font-size: 1.04rem; color: var(--charcoal); line-height: 1.7; }
+
         /* Mark done control */
         .mark-done {
             display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.25rem;
@@ -418,6 +453,7 @@
                     </div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Copy the COI and NDA templates, adjust them for your group, and send them to admin to turn into signable forms.</span></div>
                     <p>Every committee member signs a Conflict of Interest (COI) form and a Non-Disclosure Agreement (NDA) before the first meeting. Each template is a view-only Google Doc you copy and adjust for your committee, no approval needed.</p>
 
                     <div class="cards-grid">
@@ -472,6 +508,7 @@
                     </div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Send your members the invite email below, and ask them to sign the two forms before your first meeting.</span></div>
                     <p>You invite the members who have reached out to you directly. Use this sample email to bring in co-chairs and initial members and point them to the signing forms.</p>
 
                     <div class="email-sample">
@@ -508,6 +545,7 @@
                     </div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Pick a time in the scheduler and paste in your members' emails. Everyone gets the invite automatically.</span></div>
                     <p>The scheduler is for Chairs and Co-Chairs. Book a time and add your members so everyone gets the invite automatically.</p>
 
                     <h4>Watch: how to schedule a committee meeting</h4>
@@ -546,6 +584,7 @@
                     </div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Open root.pawsic.org and sign in with your assigned email to reach your committee's shared Drive.</span></div>
                     <p>Your shared Google Drive is the hub for agendas, minutes, recordings, governance documents, and member contacts. You reach it through the ROOT portal.</p>
 
                     <a class="root-link" href="https://root.pawsic.org" target="_blank" rel="noopener">
@@ -665,6 +704,7 @@
                     <div class="st-titles"><div class="step-eyebrow">Step 1</div><h3>Welcome and Our Mission</h3></div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Get to know PAWSIC's mission and read the welcome message.</span></div>
                     <p>Welcome to the PAWSIC Board. Thank you for lending your expertise to advancing wound care in post-acute settings. This section orients you to who we are and the purpose you're joining.</p>
                     <div class="callout gold">
                         <h4>About PAWSIC</h4>
@@ -685,6 +725,7 @@
                     <div class="st-titles"><div class="step-eyebrow">Step 2</div><h3>Your Role and Responsibilities</h3></div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Learn what Board members do, how much time it takes, and how long your term runs.</span></div>
                     <p>A clear picture of what Board service involves so you can contribute with confidence from day one.</p>
                     <div class="callout gold">
                         <h4>What Board members do</h4>
@@ -703,6 +744,7 @@
                     <div class="st-titles"><div class="step-eyebrow">Step 3</div><h3>Governance Documents and Required Forms</h3></div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Read the bylaws and policies, grab the deck template, then sign your COI and NDA before your first meeting.</span></div>
                     <p>Every Board member signs a Conflict of Interest (COI) form and a Non-Disclosure Agreement (NDA). Review the governance documents, then sign both forms.</p>
 
                     <h4>Review these documents</h4>
@@ -735,6 +777,7 @@
                     <div class="st-titles"><div class="step-eyebrow">Step 4</div><h3>Submit Your Bio and Headshot</h3></div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Send us a short bio and a clear, high-resolution headshot so we can feature you.</span></div>
                     <p>We feature Board members on the PAWSIC website and social media. Please send a short professional bio and a high-quality headshot.</p>
                     <div class="callout gold">
                         <h4>What to include</h4>
@@ -758,6 +801,7 @@
                     <div class="st-titles"><div class="step-eyebrow">Step 5</div><h3>Meeting Calendar and Key Contacts</h3></div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> See when the Board meets and who to contact for what.</span></div>
                     <h4>Board meeting cadence</h4>
                     <div class="callout gold"><p>[Placeholder: Board meeting schedule and cadence, for example quarterly meetings plus committee calls. Add dates or a calendar link.]</p></div>
                     <h4>Key contacts</h4>
@@ -775,6 +819,7 @@
                     <div class="st-titles"><div class="step-eyebrow">Portal access</div><h3>Access Board Documents in ROOT</h3></div>
                 </div>
                 <div class="step-body">
+                    <div class="step-tldr"><span class="tldr-dot">i</span><span><b>In short:</b> Open root.pawsic.org and sign in with your assigned email to reach all Board documents.</span></div>
                     <p>Board materials, minutes, and shared documents live in the ROOT portal. Sign in with your assigned email to reach everything you have access to.</p>
                     <a class="root-link" href="https://root.pawsic.org" target="_blank" rel="noopener">
                         <span class="rl-text"><b>Go to your ROOT portal</b><span>Click to open the portal and sign in with your assigned email</span></span>
